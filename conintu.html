@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高階英文隱喻與轉義字彙 - 互動學習平台</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #2980b9;
+            --accent-color-2: #6dd5fa;
+            --success-color: #27ae60;
+            --error-color: #c0392b;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, "Microsoft JhengHei";
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* ---------- 流動感背景光暈 ---------- */
+        .bg-blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.28;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .blob1 {
+            width: 420px; height: 420px;
+            background: radial-gradient(circle, var(--accent-color), transparent 70%);
+            top: -120px; left: -120px;
+            animation: floatBlob 18s ease-in-out infinite;
+        }
+        .blob2 {
+            width: 380px; height: 380px;
+            background: radial-gradient(circle, var(--success-color), transparent 70%);
+            bottom: -140px; right: -80px;
+            animation: floatBlob 22s ease-in-out infinite reverse;
+        }
+        .blob3 {
+            width: 320px; height: 320px;
+            background: radial-gradient(circle, #8e44ad, transparent 70%);
+            top: 45%; right: 5%;
+            animation: floatBlob 20s ease-in-out infinite;
+        }
+        @keyframes floatBlob {
+            0%, 100% { transform: translate(0,0) scale(1); }
+            50% { transform: translate(40px,-35px) scale(1.12); }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        header h1 {
+            display: inline-block;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .tabs-container {
+            margin-bottom: 40px;
+        }
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            background: none;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: var(--secondary-color);
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(41,128,185,0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        /* ---------- 卡片 ---------- */
+        .vocab-card {
+            background: var(--card-bg);
+            border-left: 5px solid var(--accent-color);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            position: relative;
+            overflow: hidden;
+            animation: cardFadeUp 0.5s ease backwards;
+        }
+
+        .tab-content.active .vocab-card:nth-child(1) { animation-delay: .02s; }
+        .tab-content.active .vocab-card:nth-child(2) { animation-delay: .06s; }
+        .tab-content.active .vocab-card:nth-child(3) { animation-delay: .10s; }
+        .tab-content.active .vocab-card:nth-child(4) { animation-delay: .14s; }
+        .tab-content.active .vocab-card:nth-child(5) { animation-delay: .18s; }
+        .tab-content.active .vocab-card:nth-child(6) { animation-delay: .22s; }
+        .tab-content.active .vocab-card:nth-child(7) { animation-delay: .26s; }
+        .tab-content.active .vocab-card:nth-child(8) { animation-delay: .30s; }
+        .tab-content.active .vocab-card:nth-child(9) { animation-delay: .34s; }
+        .tab-content.active .vocab-card:nth-child(10) { animation-delay: .38s; }
+        .tab-content.active .vocab-card:nth-child(11) { animation-delay: .42s; }
+        .tab-content.active .vocab-card:nth-child(12) { animation-delay: .46s; }
+        .tab-content.active .vocab-card:nth-child(13) { animation-delay: .50s; }
+
+        @keyframes cardFadeUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .vocab-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            height: 3px; width: 0;
+            background: linear-gradient(90deg, var(--accent-color), var(--success-color));
+            transition: width 0.4s ease;
+        }
+
+        .vocab-card:hover {
+            transform: translateY(-6px) scale(1.015);
+            box-shadow: 0 14px 24px rgba(41,128,185,0.15);
+        }
+
+        .vocab-card:hover::after { width: 100%; }
+
+        .vocab-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .vocab-word-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-icon {
+            width: 44px; height: 44px;
+            flex-shrink: 0;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-color-2));
+            box-shadow: 0 4px 10px rgba(41,128,185,0.3);
+        }
+
+        .vocab-word {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* ---------- 發音按鈕 ---------- */
+        .speak-btn {
+            border: none;
+            cursor: pointer;
+            border-radius: 50%;
+            color: white;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-color-2));
+            width: 32px; height: 32px;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 2px 6px rgba(41,128,185,0.4);
+            flex-shrink: 0;
+        }
+        .speak-btn:hover {
+            transform: scale(1.18);
+            box-shadow: 0 5px 12px rgba(41,128,185,0.5);
+        }
+        .speak-btn:active { transform: scale(0.92); }
+        .speak-btn.small {
+            width: 24px; height: 24px;
+            font-size: 0.7rem;
+            margin-left: 8px;
+            background: linear-gradient(135deg, #7f8c8d, #bdc3c7);
+            box-shadow: none;
+        }
+        .speak-btn.small:hover { box-shadow: 0 3px 8px rgba(127,140,141,0.4); }
+
+        .vocab-meta {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .meta-label {
+            font-weight: bold;
+            color: #7f8c8d;
+        }
+
+        .collocation {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            background: #f1f2f6;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            border-left: 3px solid #bdc3c7;
+        }
+        .collocation-text { flex: 1; }
+
+        /* ---------- 一字多義卡片 ---------- */
+        .meaning-block {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-top: 12px;
+            border-left: 3px solid var(--accent-color);
+        }
+        .meaning-num {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-color-2));
+            padding: 2px 9px;
+            border-radius: 10px;
+            margin-bottom: 6px;
+        }
+
+        .quiz-section {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+            margin-top: 50px;
+        }
+
+        .quiz-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary-color);
+            padding-left: 10px;
+        }
+
+        .question-block {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .option-btn {
+            padding: 12px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover {
+            background: #edf2f7;
+            border-color: #cbd5e0;
+            transform: translateY(-2px);
+        }
+
+        .option-btn.correct {
+            background-color: #d4edda !important;
+            border-color: #c3e6cb !important;
+            color: #155724 !important;
+            font-weight: bold;
+        }
+
+        .option-btn.wrong {
+            background-color: #f8d7da !important;
+            border-color: #f5c6cb !important;
+            color: #721c24 !important;
+        }
+
+        .option-btn.disabled {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .option-btn.correct.disabled, .option-btn.wrong.disabled {
+            opacity: 1;
+        }
+
+        .feedback {
+            display: none;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-size: 0.95rem;
+        }
+
+        .feedback.correct-bg {
+            display: block;
+            background-color: #e6f4ea;
+            color: var(--success-color);
+            border: 1px solid #a3cfbb;
+        }
+
+        .feedback.wrong-bg {
+            display: block;
+            background-color: #fce8e6;
+            color: var(--error-color);
+            border: 1px solid #f5c2c2;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-blob blob1"></div>
+<div class="bg-blob blob2"></div>
+<div class="bg-blob blob3"></div>
+
+<div class="container">
+    <header>
+        <h1>高階英文核心字彙：破解學術與大考的隱喻盲點</h1>
+        <p>💡 提示：點擊下方標籤瀏覽單字核心概念，按 🔊 聽發音，接著完成下方的實戰挑戰題吧！</p>
+    </header>
+
+    <div class="tabs-container">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab(event, 'tab1')">1. 空間、建築與物件</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab2')">2. 身體部位</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab3')">3. 具體動作與概念</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab4')">4. 地理與自然局勢</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab5')">5. 抽象特質與 ESL 地雷字</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab6')">6. 常見一字多義字彙</button>
+        </div>
+
+        <!-- ============ TAB 1 ============ -->
+        <div id="tab1" class="tab-content active">
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🚗</div><div class="vocab-word">vehicle</div></div>
+                    <button class="speak-btn" data-text="vehicle" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>車輛、汽車</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>媒介、手法、工具、載體</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>art is a vehicle for emotion / vehicle of expression</span>
+                    <button class="speak-btn small" data-text="art is a vehicle for emotion" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🪟</div><div class="vocab-word">window</div></div>
+                    <button class="speak-btn" data-text="window" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>窗戶</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>短暫的時機、機會之窗、時間限制</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>a narrow window of time / a window of opportunity</span>
+                    <button class="speak-btn small" data-text="a narrow window of time" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🏠</div><div class="vocab-word">house</div></div>
+                    <button class="speak-btn" data-text="house" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>房子</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>收藏、容納、提供空間 (動詞)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>the library houses rare manuscripts.</span>
+                    <button class="speak-btn small" data-text="the library houses rare manuscripts" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🌾</div><div class="vocab-word">field</div></div>
+                    <button class="speak-btn" data-text="field" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>田地、球場</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>專業領域、學術學門</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>an expert in the field of AI</span>
+                    <button class="speak-btn small" data-text="an expert in the field of AI" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🚪</div><div class="vocab-word">room</div></div>
+                    <button class="speak-btn" data-text="room" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>房間</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>空間、餘地、進步空間 (不可數)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>there is room for improvement.</span>
+                    <button class="speak-btn small" data-text="there is room for improvement" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🔝</div><div class="vocab-word">ceiling</div></div>
+                    <button class="speak-btn" data-text="ceiling" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>天花板</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>最高限度、無法逾越的障礙</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>hit a glass ceiling / price ceiling</span>
+                    <button class="speak-btn small" data-text="hit a glass ceiling" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">📡</div><div class="vocab-word">channel</div></div>
+                    <button class="speak-btn" data-text="channel" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>電視頻道、海峽</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>管道、途徑 (溝通或資源)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>complaints through official channels</span>
+                    <button class="speak-btn small" data-text="complaints through official channels" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🛣️</div><div class="vocab-word">avenue</div></div>
+                    <button class="speak-btn" data-text="avenue" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>大道、馬路</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>途徑、手段 (解決問題的方法)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>explore every avenue to find a solution</span>
+                    <button class="speak-btn small" data-text="explore every avenue to find a solution" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🎻</div><div class="vocab-word">instrument</div></div>
+                    <button class="speak-btn" data-text="instrument" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>樂器、儀器</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>促成某事的手段、傀儡、工具</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>an instrument of dark forces / financial instrument</span>
+                    <button class="speak-btn small" data-text="an instrument of dark forces" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🪞</div><div class="vocab-word">mirror</div></div>
+                    <button class="speak-btn" data-text="mirror" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>鏡子</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>反映、折射出 (現實、狀況) (動詞)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>the stock market mirrors the economy</span>
+                    <button class="speak-btn small" data-text="the stock market mirrors the economy" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🧶</div><div class="vocab-word">fabric</div></div>
+                    <button class="speak-btn" data-text="fabric" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>布料、織物</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>(社會、組織的) 基本結構、組成骨架</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>the fabric of society / the social fabric</span>
+                    <button class="speak-btn small" data-text="the fabric of society" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🛏️</div><div class="vocab-word">blanket</div></div>
+                    <button class="speak-btn" data-text="blanket" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>毛毯</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>全面性的、一刀切的 (形容詞)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>a blanket ban on smoking / blanket insurance</span>
+                    <button class="speak-btn small" data-text="a blanket ban on smoking" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🧵</div><div class="vocab-word">thread</div></div>
+                    <button class="speak-btn" data-text="thread" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>一條線、縫線</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>(對話、思路的) 思緒、主線、脈絡</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>lose the thread of the conversation</span>
+                    <button class="speak-btn small" data-text="lose the thread of the conversation" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ TAB 2 身體部位 ============ -->
+        <div id="tab2" class="tab-content">
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🫱</div><div class="vocab-word">elbow</div></div>
+                    <button class="speak-btn" data-text="elbow" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>手肘</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>擠進 (某圈子)、推開、強行排擠 (動詞)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>elbow one's way into the market / elbowed out of the company</span>
+                    <button class="speak-btn small" data-text="elbow one's way into the market" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🧠</div><div class="vocab-word">head</div></div>
+                    <button class="speak-btn" data-text="head" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>頭</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>主管、率領 (動詞)；朝某方向前進 (動詞)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>head the project / head towards the exit</span>
+                    <button class="speak-btn small" data-text="head the project" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🏋️</div><div class="vocab-word">shoulder</div></div>
+                    <button class="speak-btn" data-text="shoulder" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>肩膀</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>承擔 (責任、費用、重擔) (動詞)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>shoulder the responsibility / shoulder the blame</span>
+                    <button class="speak-btn small" data-text="shoulder the responsibility" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🦶</div><div class="vocab-word">foot</div></div>
+                    <button class="speak-btn" data-text="foot" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>腳</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>買單、支付 (昂貴的費用) (動詞)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>foot the bill / foot the cost</span>
+                    <button class="speak-btn small" data-text="foot the bill" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🔙</div><div class="vocab-word">back</div></div>
+                    <button class="speak-btn" data-text="back" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>背部</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>支持、做後盾、資助 (動詞)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>the proposal was backed by the government</span>
+                    <button class="speak-btn small" data-text="the proposal was backed by the government" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">💪</div><div class="vocab-word">muscle</div></div>
+                    <button class="speak-btn" data-text="muscle" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>肌肉</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>強行介入 (動詞)；實力、影響力 (名詞)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>muscle in on someone's territory / financial muscle</span>
+                    <button class="speak-btn small" data-text="muscle in on someone's territory" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🍽️</div><div class="vocab-word">stomach</div></div>
+                    <button class="speak-btn" data-text="stomach" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>胃、肚子</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>忍受、承受得住 (令人不快的事) (動詞)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>cannot stomach his arrogant attitude</span>
+                    <button class="speak-btn small" data-text="cannot stomach his arrogant attitude" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">👆</div><div class="vocab-word">finger</div></div>
+                    <button class="speak-btn" data-text="finger" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>手指</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>準確指出、鎖定 (動詞)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>put a finger on what's wrong / finger a suspect</span>
+                    <button class="speak-btn small" data-text="put a finger on what's wrong" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">👁️</div><div class="vocab-word">eye</div></div>
+                    <button class="speak-btn" data-text="eye" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>眼睛</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>看中、審視、打量、計畫 (動詞)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>eyeing expansion into Asia / eye the prize</span>
+                    <button class="speak-btn small" data-text="eyeing expansion into Asia" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🦴</div><div class="vocab-word">backbone</div></div>
+                    <button class="speak-btn" data-text="backbone" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>脊椎骨</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>骨幹、核心支柱、堅毅的意志</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>the backbone of the economy</span>
+                    <button class="speak-btn small" data-text="the backbone of the economy" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ TAB 3 ============ -->
+        <div id="tab3" class="tab-content">
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">⚓</div><div class="vocab-word">harbor</div></div>
+                    <button class="speak-btn" data-text="harbor" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>港口</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>心懷、潛伏 (怨恨、想法、病毒等) (動詞)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>harbor a resentment / harbor doubts / harbor a virus</span>
+                    <button class="speak-btn small" data-text="harbor a resentment" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🌱</div><div class="vocab-word">foster</div></div>
+                    <button class="speak-btn" data-text="foster" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>領養、寄養</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>培養、促進 (關係、技能、環境) (動詞)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>foster a sense of community / foster growth</span>
+                    <button class="speak-btn small" data-text="foster a sense of community" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🪴</div><div class="vocab-word">cultivate</div></div>
+                    <button class="speak-btn" data-text="cultivate" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>耕作、種植</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>培養 (品質、習慣)、建立發展 (關係) (動詞)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>cultivate a habit of reading / cultivate relationships</span>
+                    <button class="speak-btn small" data-text="cultivate a habit of reading" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">⚖️</div><div class="vocab-word">weigh</div></div>
+                    <button class="speak-btn" data-text="weigh" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>稱重量</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>權衡、認真考慮 (利弊、重要性) (動詞)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>weigh the pros and cons / weigh one's options</span>
+                    <button class="speak-btn small" data-text="weigh the pros and cons" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🪙</div><div class="vocab-word">coin</div></div>
+                    <button class="speak-btn" data-text="coin" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>硬幣</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>創造、杜撰 (新詞彙、新說法) (動詞)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>the term was coined in 1920. / coin a phrase</span>
+                    <button class="speak-btn small" data-text="the term was coined in 1920" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🚰</div><div class="vocab-word">drain</div></div>
+                    <button class="speak-btn" data-text="drain" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>排水管、消耗</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>使枯竭、使精疲力竭、大舉消耗 (動詞)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>drain the resource / brain drain / emotionally drained</span>
+                    <button class="speak-btn small" data-text="drain the resource" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ TAB 4 ============ -->
+        <div id="tab4" class="tab-content">
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🌐</div><div class="vocab-word">domain</div></div>
+                    <button class="speak-btn" data-text="domain" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>網域</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>領域、勢力範圍、知識範疇</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>outside my domain of expertise / public domain</span>
+                    <button class="speak-btn small" data-text="outside my domain of expertise" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🌅</div><div class="vocab-word">horizon</div></div>
+                    <button class="speak-btn" data-text="horizon" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>地平線</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>眼界、見識、未來的發展前景</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>broaden one's horizons / on the horizon</span>
+                    <button class="speak-btn small" data-text="broaden one's horizons" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🏞️</div><div class="vocab-word">landscape</div></div>
+                    <button class="speak-btn" data-text="landscape" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>風景、景色</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>(某種活動或形勢的) 全面形貌、格局</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>the political landscape / changing business landscape</span>
+                    <button class="speak-btn small" data-text="the political landscape" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🚧</div><div class="vocab-word">boundary</div></div>
+                    <button class="speak-btn" data-text="boundary" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>邊界、國界</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>(人際關係、道德、學術的) 分寸、界線</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>set personal boundaries / push the boundaries</span>
+                    <button class="speak-btn small" data-text="set personal boundaries" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🌦️</div><div class="vocab-word">climate</div></div>
+                    <button class="speak-btn" data-text="climate" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>氣候</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>局勢、風氣、社會氛圍</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>the current economic climate / climate of fear</span>
+                    <button class="speak-btn small" data-text="the current economic climate" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🌊</div><div class="vocab-word">erosion</div></div>
+                    <button class="speak-btn" data-text="erosion" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>土壤流失、侵蝕</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>(權力、價值、信任的) 削弱、逐漸瓦解</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>the erosion of trust</span>
+                    <button class="speak-btn small" data-text="the erosion of trust" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">💨</div><div class="vocab-word">evaporate</div></div>
+                    <button class="speak-btn" data-text="evaporate" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>蒸發</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>(希望、信心、財富) 憑空消失、幻滅 (動詞)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>their hopes evaporated into thin air.</span>
+                    <button class="speak-btn small" data-text="their hopes evaporated into thin air" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ TAB 5 ============ -->
+        <div id="tab5" class="tab-content">
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🙏</div><div class="vocab-word">grace</div></div>
+                    <button class="speak-btn" data-text="grace" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>優雅；(宗教) 恩典</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義 1：</span><strong>從容得體地應對逆境；寬限期 (名詞/動詞)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>accept the loss with grace / a grace period</span>
+                    <button class="speak-btn small" data-text="accept the loss with grace" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta" style="margin-top:10px;"><span class="meta-label">抽象轉義 2：</span><strong>使...增光、蒞臨、為...錦上添花 (及物動詞)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>her beauty graced the cover of the magazine</span>
+                    <button class="speak-btn small" data-text="her beauty graced the cover of the magazine" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">💱</div><div class="vocab-word">currency</div></div>
+                    <button class="speak-btn" data-text="currency" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>貨幣</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>普遍的認可度、流通程度、可信度</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>the idea gained currency among scholars</span>
+                    <button class="speak-btn small" data-text="the idea gained currency among scholars" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">📶</div><div class="vocab-word">bandwidth</div></div>
+                    <button class="speak-btn" data-text="bandwidth" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>(網路) 頻寬</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>個人的心力、時間與精力額度</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>I don't have the bandwidth for another project</span>
+                    <button class="speak-btn small" data-text="I don't have the bandwidth for another project" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🛞</div><div class="vocab-word">traction</div></div>
+                    <button class="speak-btn" data-text="traction" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>(車輪的) 牽引力、抓地力</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>獲得關注、支持度、進展</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>the campaign is gaining traction</span>
+                    <button class="speak-btn small" data-text="the campaign is gaining traction" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">😋</div><div class="vocab-word">appetite</div></div>
+                    <button class="speak-btn" data-text="appetite" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>食慾</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>渴望、興趣、意願 (常接 for)</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>a healthy appetite for risk</span>
+                    <button class="speak-btn small" data-text="a healthy appetite for risk" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🧪</div><div class="vocab-word">chemistry</div></div>
+                    <button class="speak-btn" data-text="chemistry" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>化學 (科目)</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>人與人之間的默契、投緣感</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>the two actors have great chemistry</span>
+                    <button class="speak-btn small" data-text="the two actors have great chemistry" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">👣</div><div class="vocab-word">footprint</div></div>
+                    <button class="speak-btn" data-text="footprint" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="vocab-meta"><span class="meta-label">直覺原意：</span>腳印</div>
+                <div class="vocab-meta"><span class="meta-label">抽象轉義：</span><strong>影響範圍、佔用的資源或空間</strong></div>
+                <div class="collocation">
+                    <span class="collocation-text"><strong>搭配詞：</strong>reduce your carbon footprint</span>
+                    <button class="speak-btn small" data-text="reduce your carbon footprint" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ TAB 6 一字多義 ============ -->
+        <div id="tab6" class="tab-content">
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">📫</div><div class="vocab-word">address</div></div>
+                    <button class="speak-btn" data-text="address" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="meaning-block">
+                    <div class="meaning-num">字義 1・名詞</div>
+                    <div class="vocab-meta">地址</div>
+                    <div class="collocation">
+                        <span class="collocation-text">mailing address / email address</span>
+                        <button class="speak-btn small" data-text="mailing address" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                    </div>
+                </div>
+                <div class="meaning-block">
+                    <div class="meaning-num">字義 2・名詞</div>
+                    <div class="vocab-meta">(正式) 演說、致詞</div>
+                    <div class="collocation">
+                        <span class="collocation-text">deliver a keynote address</span>
+                        <button class="speak-btn small" data-text="deliver a keynote address" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                    </div>
+                </div>
+                <div class="meaning-block">
+                    <div class="meaning-num">字義 3・動詞</div>
+                    <div class="vocab-meta">處理、解決 (問題)；向...發表演說</div>
+                    <div class="collocation">
+                        <span class="collocation-text">address the concerns raised by employees</span>
+                        <button class="speak-btn small" data-text="address the concerns raised by employees" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                    </div>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🎁</div><div class="vocab-word">present</div></div>
+                    <button class="speak-btn" data-text="present" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="meaning-block">
+                    <div class="meaning-num">字義 1・名詞</div>
+                    <div class="vocab-meta">禮物</div>
+                    <div class="collocation">
+                        <span class="collocation-text">a birthday present</span>
+                        <button class="speak-btn small" data-text="a birthday present" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                    </div>
+                </div>
+                <div class="meaning-block">
+                    <div class="meaning-num">字義 2・形容詞</div>
+                    <div class="vocab-meta">出席的；目前的、當下的</div>
+                    <div class="collocation">
+                        <span class="collocation-text">all members were present at the meeting</span>
+                        <button class="speak-btn small" data-text="all members were present at the meeting" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                    </div>
+                </div>
+                <div class="meaning-block">
+                    <div class="meaning-num">字義 3・動詞</div>
+                    <div class="vocab-meta">呈現、提出、頒發</div>
+                    <div class="collocation">
+                        <span class="collocation-text">present the findings to the board</span>
+                        <button class="speak-btn small" data-text="present the findings to the board" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                    </div>
+                </div>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-card-header">
+                    <div class="vocab-word-group"><div class="card-icon">🏃</div><div class="vocab-word">run</div></div>
+                    <button class="speak-btn" data-text="run" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                </div>
+                <div class="meaning-block">
+                    <div class="meaning-num">字義 1・動詞</div>
+                    <div class="vocab-meta">跑步 (最基本的字義)</div>
+                    <div class="collocation">
+                        <span class="collocation-text">run five kilometers every morning</span>
+                        <button class="speak-btn small" data-text="run five kilometers every morning" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                    </div>
+                </div>
+                <div class="meaning-block">
+                    <div class="meaning-num">字義 2・動詞</div>
+                    <div class="vocab-meta">經營、管理 (公司、店家)</div>
+                    <div class="collocation">
+                        <span class="collocation-text">run a small bakery</span>
+                        <button class="speak-btn small" data-text="run a small bakery" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                    </div>
+                </div>
+                <div class="meaning-block">
+                    <div class="meaning-num">字義 3・動詞</div>
+                    <div class="vocab-meta">(機器、程式) 運轉、持續進行</div>
+                    <div class="collocation">
+                        <span class="collocation-text">the software runs smoothly</span>
+                        <button class="speak-btn small" data-text="the software runs smoothly" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                    </div>
+                </div>
+                <div class="meaning-block">
+                    <div class="meaning-num">字義 4・動詞</div>
+                    <div class="vocab-meta">參選 (常接 for)</div>
+                    <div class="collocation">
+                        <span class="collocation-text">run for mayor</span>
+                        <button class="speak-btn small" data-text="run for mayor" onclick="speak(this.dataset.text)" aria-label="發音">🔊</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="quiz-section">
+        <h2>📝 實戰自我檢測 (高中/學測/多益風格)</h2>
+
+        <div id="q1" class="question-block">
+            <div class="question-text">1. Poetry has always been a powerful ______ of expression for writers to convey their deepest fears and joys.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer('q1', 'vehicle', this)">(A) vehicle</button>
+                <button class="option-btn" onclick="checkAnswer('q1', 'ceiling', this)">(B) ceiling</button>
+                <button class="option-btn" onclick="checkAnswer('q1', 'harbor', this)">(C) harbor</button>
+                <button class="option-btn" onclick="checkAnswer('q1', 'climate', this)">(D) climate</button>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <div id="q2" class="question-block">
+            <div class="question-text">2. We only have a narrow ______ of time to submit the university applications before the server closes tonight.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer('q2', 'field', this)">(A) field</button>
+                <button class="option-btn" onclick="checkAnswer('q2', 'room', this)">(B) room</button>
+                <button class="option-btn" onclick="checkAnswer('q2', 'window', this)">(C) window</button>
+                <button class="option-btn" onclick="checkAnswer('q2', 'house', this)">(D) house</button>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <div id="q3" class="question-block">
+            <div class="question-text">3. Small startups often find it extremely difficult to ______ their way into the market dominated by international tech giants.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer('q3', 'shoulder', this)">(A) shoulder</button>
+                <button class="option-btn" onclick="checkAnswer('q3', 'elbow', this)">(B) elbow</button>
+                <button class="option-btn" onclick="checkAnswer('q3', 'stomach', this)">(C) stomach</button>
+                <button class="option-btn" onclick="checkAnswer('q3', 'weigh', this)">(D) weigh</button>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <div id="q4" class="question-block">
+            <div class="question-text">4. The newly built national archives building will ______ over one million historical documents and ancient maps.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer('q4', 'coin', this)">(A) coin</button>
+                <button class="option-btn" onclick="checkAnswer('q4', 'evaporate', this)">(B) evaporate</button>
+                <button class="option-btn" onclick="checkAnswer('q4', 'cultivate', this)">(C) cultivate</button>
+                <button class="option-btn" onclick="checkAnswer('q4', 'house', this)">(D) house</button>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <div id="q5" class="question-block">
+            <div class="question-text">5. After carefully ______ the pros and cons of studying abroad, Jeremy finally decided to accept the scholarship from Tokyo University.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer('q5', 'weighing', this)">(A) weighing</button>
+                <button class="option-btn" onclick="checkAnswer('q5', 'fostering', this)">(B) fostering</button>
+                <button class="option-btn" onclick="checkAnswer('q5', 'harboring', this)">(C) harboring</button>
+                <button class="option-btn" onclick="checkAnswer('q5', 'elbowing', this)">(D) elbowing</button>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <div id="q6" class="question-block">
+            <div class="question-text">6. The high school English teacher encouraged her students to ______ a habit of reading English novels for at least 15 minutes every day.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer('q6', 'stomach', this)">(A) stomach</button>
+                <button class="option-btn" onclick="checkAnswer('q6', 'cultivate', this)">(B) cultivate</button>
+                <button class="option-btn" onclick="checkAnswer('q6', 'evaporate', this)">(C) evaporate</button>
+                <button class="option-btn" onclick="checkAnswer('q6', 'shoulder', this)">(D) shoulder</button>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <div id="q7" class="question-block">
+            <div class="question-text">7. When the rich businessman refused to pay for his son's expensive party, the boy's grandfather agreed to ______ the bill.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer('q7', 'head', this)">(A) head</button>
+                <button class="option-btn" onclick="checkAnswer('q7', 'shoulder', this)">(B) shoulder</button>
+                <button class="option-btn" onclick="checkAnswer('q7', 'foot', this)">(C) foot</button>
+                <button class="option-btn" onclick="checkAnswer('q7', 'hand', this)">(D) hand</button>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <div id="q8" class="question-block">
+            <div class="question-text">8. In today's highly competitive economic ______, online marketing has become crucial for any business to survive.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer('q8', 'ceiling', this)">(A) ceiling</button>
+                <button class="option-btn" onclick="checkAnswer('q8', 'field', this)">(B) field</button>
+                <button class="option-btn" onclick="checkAnswer('q8', 'climate', this)">(C) climate</button>
+                <button class="option-btn" onclick="checkAnswer('q8', 'vehicle', this)">(D) vehicle</button>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <div id="q9" class="question-block">
+            <div class="question-text">9. As the police provided more concrete evidence, all the suspect's lies quickly ______ into thin air.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer('q9', 'evaporated', this)">(A) evaporated</button>
+                <button class="option-btn" onclick="checkAnswer('q9', 'harbored', this)">(B) harbored</button>
+                <button class="option-btn" onclick="checkAnswer('q9', 'coined', this)">(C) coined</button>
+                <button class="option-btn" onclick="checkAnswer('q9', 'housed', this)">(D) housed</button>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <div id="q10" class="question-block">
+            <div class="question-text">10. Professor Wang is a world-renowned scientist who has spent over thirty years conducting ground-breaking research in the ______ of biotechnology.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer('q10', 'room', this)">(A) room</button>
+                <button class="option-btn" onclick="checkAnswer('q10', 'domain', this)">(B) domain</button>
+                <button class="option-btn" onclick="checkAnswer('q10', 'field', this)">(C) field</button>
+                <button class="option-btn" onclick="checkAnswer('q10', 'window', this)">(D) window</button>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <div id="q11" class="question-block">
+            <div class="question-text">11. Despite losing the final match, the young athlete accepted defeat with remarkable ______, congratulating her opponent warmly.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer('q11', 'grace', this)">(A) grace</button>
+                <button class="option-btn" onclick="checkAnswer('q11', 'currency', this)">(B) currency</button>
+                <button class="option-btn" onclick="checkAnswer('q11', 'traction', this)">(C) traction</button>
+                <button class="option-btn" onclick="checkAnswer('q11', 'appetite', this)">(D) appetite</button>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <div id="q12" class="question-block">
+            <div class="question-text">12. After the rumor started circulating online, the false claim quickly gained ______ among younger social media users.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer('q12', 'bandwidth', this)">(A) bandwidth</button>
+                <button class="option-btn" onclick="checkAnswer('q12', 'currency', this)">(B) currency</button>
+                <button class="option-btn" onclick="checkAnswer('q12', 'appetite', this)">(C) appetite</button>
+                <button class="option-btn" onclick="checkAnswer('q12', 'footprint', this)">(D) footprint</button>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <div id="q13" class="question-block">
+            <div class="question-text">13. As a working parent with three kids, I simply don't have the ______ to take on any more volunteer commitments this semester.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer('q13', 'traction', this)">(A) traction</button>
+                <button class="option-btn" onclick="checkAnswer('q13', 'chemistry', this)">(B) chemistry</button>
+                <button class="option-btn" onclick="checkAnswer('q13', 'bandwidth', this)">(C) bandwidth</button>
+                <button class="option-btn" onclick="checkAnswer('q13', 'grace', this)">(D) grace</button>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <div id="q14" class="question-block">
+            <div class="question-text">14. The new budget smartphone brand is slowly gaining ______ among price-conscious consumers in Southeast Asia.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer('q14', 'traction', this)">(A) traction</button>
+                <button class="option-btn" onclick="checkAnswer('q14', 'appetite', this)">(B) appetite</button>
+                <button class="option-btn" onclick="checkAnswer('q14', 'chemistry', this)">(C) chemistry</button>
+                <button class="option-btn" onclick="checkAnswer('q14', 'currency', this)">(D) currency</button>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <div id="q15" class="question-block">
+            <div class="question-text">15. Investors have shown little ______ for risky ventures since the market crash, preferring safer government bonds instead.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer('q15', 'footprint', this)">(A) footprint</button>
+                <button class="option-btn" onclick="checkAnswer('q15', 'chemistry', this)">(B) chemistry</button>
+                <button class="option-btn" onclick="checkAnswer('q15', 'appetite', this)">(C) appetite</button>
+                <button class="option-btn" onclick="checkAnswer('q15', 'grace', this)">(D) grace</button>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <div id="q16" class="question-block">
+            <div class="question-text">16. The mayor's opening speech will ______ concerns about the recent rise in local crime rates directly.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer('q16', 'present', this)">(A) present</button>
+                <button class="option-btn" onclick="checkAnswer('q16', 'address', this)">(B) address</button>
+                <button class="option-btn" onclick="checkAnswer('q16', 'run', this)">(C) run</button>
+                <button class="option-btn" onclick="checkAnswer('q16', 'grace', this)">(D) grace</button>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <div id="q17" class="question-block">
+            <div class="question-text">17. Despite tough competition, she decided to ______ for the position of student council president next year.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer('q17', 'present', this)">(A) present</button>
+                <button class="option-btn" onclick="checkAnswer('q17', 'address', this)">(B) address</button>
+                <button class="option-btn" onclick="checkAnswer('q17', 'run', this)">(C) run</button>
+                <button class="option-btn" onclick="checkAnswer('q17', 'house', this)">(D) house</button>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <div id="q18" class="question-block">
+            <div class="question-text">18. The research team will ______ their latest findings on renewable energy at the international conference next month.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer('q18', 'address', this)">(A) address</button>
+                <button class="option-btn" onclick="checkAnswer('q18', 'run', this)">(B) run</button>
+                <button class="option-btn" onclick="checkAnswer('q18', 'present', this)">(C) present</button>
+                <button class="option-btn" onclick="checkAnswer('q18', 'foot', this)">(D) foot</button>
+            </div>
+            <div class="feedback"></div>
+        </div>
+    </div>
+
+    <footer>© 2026 高階英語學習平台 - 專為克服 ESL 學生盲點設計</footer>
+</div>
+
+<script>
+    function switchTab(evt, tabId) {
+        const tabContents = document.getElementsByClassName("tab-content");
+        for (let i = 0; i < tabContents.length; i++) {
+            tabContents[i].className = tabContents[i].className.replace(" active", "");
+        }
+        const tabBtns = document.getElementsByClassName("tab-btn");
+        for (let i = 0; i < tabBtns.length; i++) {
+            tabBtns[i].className = tabBtns[i].className.replace(" active", "");
+        }
+        document.getElementById(tabId).className += " active";
+        evt.currentTarget.className += " active";
+    }
+
+    // ---------- 發音功能 ----------
+    function speak(text) {
+        if (!('speechSynthesis' in window)) {
+            alert('抱歉，您的瀏覽器不支援語音朗讀功能。');
+            return;
+        }
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.9;
+        utterance.pitch = 1;
+        window.speechSynthesis.speak(utterance);
+    }
+
+    const explanations = {
+        q1: { correct: "vehicle", text: "正確！這裡的 vehicle of expression 指的是『表達的媒介/工具』，而非實體車輛。詩歌承載著作者的想法與情感，是完美的抽象隱喻。" },
+        q2: { correct: "window", text: "正確！window of time 指的是『短暫的時間窗口、限定的時機』。就像打開的窗戶很快會關上，機會稍縱即逝。" },
+        q3: { correct: "elbow", text: "正確！動詞 elbow one's way into 畫面感十足，指像在擁擠人群中用手肘『強行擠進、推開對手以卡位』。" },
+        q4: { correct: "house", text: "正確！動詞 house 在學術與正式語境中極其常見，表示『收藏、容納、提供空間』，主詞通常為博物館、圖書館或建築物。" },
+        q5: { correct: "weighing", text: "正確！weigh the pros and cons 是標準搭配詞，意思是『權衡利弊、認真秤量事情的好壞』以做出理性的抉擇。" },
+        q6: { correct: "cultivate", text: "正確！cultivate a habit 指的是『培養習慣』，從原本物理上的耕作與種植，延伸為精心孵育抽象的習慣或品質。" },
+        q7: { correct: "foot", text: "正確！foot the bill 是道地的片語，意為『買單、付帳』，通常用在支付一筆昂貴或非預期的費用。" },
+        q8: { correct: "climate", text: "正確！economic climate 指的是『經濟形勢/氣候』。climate 在這裡並非物理天氣，而是指整個社會環境的『氛圍或局勢』。" },
+        q9: { correct: "evaporated", text: "正確！evaporate into thin air 意為『憑空消失、幻滅』。謊言或希望像水蒸氣一樣蒸發，不留痕跡。" },
+        q10: { correct: "field", text: "正確！in the field of... 是學術論文高頻搭配，指在某個『學術領域或專業學門』，不要誤選為田地囉！" },
+        q11: { correct: "grace", text: "正確！grace under pressure / accept ... with grace 指『在壓力或逆境下依然保持風度與從容』，而非單純的外表優雅。" },
+        q12: { correct: "currency", text: "正確！gain currency 指『(說法、想法) 開始廣為流傳、被普遍接受』，就像貨幣一樣在人群中『流通』。" },
+        q13: { correct: "bandwidth", text: "正確！這裡的 bandwidth 借用『網路頻寬』的概念，指一個人『可運用的時間與心力額度』，是近年職場英文的高頻用法。" },
+        q14: { correct: "traction", text: "正確！gain traction 原指輪胎的『抓地力』，引申為『獲得關注與進展、逐漸站穩腳步』。" },
+        q15: { correct: "appetite", text: "正確！appetite for risk 指『對風險的胃口/意願』，appetite 從食慾引申為『渴望、意願程度』。" },
+        q16: { correct: "address", text: "正確！動詞 address 在此指『正面處理、回應 (問題或疑慮)』，而不是『地址』。這是公文與演講中極常見的用法。" },
+        q17: { correct: "run", text: "正確！run for + 職位 意為『參選』，源自候選人四處奔走拉票的畫面，是選舉新聞的高頻字。" },
+        q18: { correct: "present", text: "正確！present 在此作動詞，意為『發表、呈現 (研究成果)』，是學術與商業簡報最常見的用法之一。" }
+    };
+
+    function checkAnswer(questionId, selectedValue, btnElement) {
+        const questionBlock = document.getElementById(questionId);
+        const buttons = questionBlock.getElementsByClassName("option-btn");
+        const feedbackDiv = questionBlock.querySelector(".feedback");
+        const config = explanations[questionId];
+
+        for (let button of buttons) {
+            button.classList.add("disabled");
+            if (button.textContent.includes(config.correct)) {
+                button.classList.add("correct");
+            }
+        }
+
+        if (selectedValue === config.correct) {
+            btnElement.classList.add("correct");
+            feedbackDiv.innerHTML = '<div class="feedback-title">🎯 太棒了！答對了！</div>' + config.text;
+            feedbackDiv.className = "feedback correct-bg";
+        } else {
+            if (!btnElement.classList.contains("correct")) {
+                btnElement.classList.add("wrong");
+            }
+            feedbackDiv.innerHTML = '<div class="feedback-title">❌ 差一點點！被直覺拐到了：</div>' + config.text;
+            feedbackDiv.className = "feedback wrong-bg";
+        }
+    }
+</script>
+
+</body>
+</html>
