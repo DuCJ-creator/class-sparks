@@ -61,7 +61,24 @@
     function renderCards(tab){currentTab=tab;cards.innerHTML=data[tab].map((d,i)=>`<article class="card"><div><div class="card-top"><span class="number">0${i+1}</span><button class="sound" aria-label="Play pronunciation for ${d[0]}" data-word="${d[0]}">◖</button></div><div class="term">${d[0]}</div><div class="pron">${d[1]}</div><div class="meaning">${d[3]}</div></div><div class="examples"><span class="tag">${d[2]}</span><br><b>${d[4]}</b><br><span>${d[5]}</span></div></article>`).join('');
       document.querySelectorAll('.sound').forEach(btn=>btn.addEventListener('click',()=>speak(btn.dataset.word,btn)));
     }
-    function speak(word,btn){if('speechSynthesis' in window){window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(word);u.lang='en-US';u.rate=.82;btn.classList.add('playing');u.onend=()=>btn.classList.remove('playing');window.speechSynthesis.speak(u)}else{btn.textContent='—'}}
+    function speak(word,btn){
+      if(!('speechSynthesis' in window)||!('SpeechSynthesisUtterance' in window)){btn.title='Your browser does not support speech';return}
+      const synth=window.speechSynthesis;
+      synth.cancel();
+      synth.resume();
+      const u=new SpeechSynthesisUtterance(word);
+      const voices=synth.getVoices();
+      u.voice=voices.find(v=>/^en(-|_)(US|GB|AU)/i.test(v.lang))||voices.find(v=>/^en/i.test(v.lang))||null;
+      u.lang=u.voice?.lang||'en-US';
+      u.rate=.78;
+      u.pitch=1;
+      btn.classList.add('playing');
+      u.onend=()=>btn.classList.remove('playing');
+      u.onerror=()=>{btn.classList.remove('playing');btn.title='Try clicking again to play pronunciation'};
+      synth.speak(u);
+      setTimeout(()=>{if(synth.paused)synth.resume()},120);
+    }
+    if('speechSynthesis' in window){window.speechSynthesis.onvoiceschanged=()=>window.speechSynthesis.getVoices()}
     document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));tab.classList.add('active');renderCards(tab.dataset.tab)}));
     renderCards('animals');
 
