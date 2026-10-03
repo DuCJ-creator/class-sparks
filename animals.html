@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wild Earth 野生大地：Animal Explorer 動物種類探索網</title>
+<style>
+:root{--forest:#2d5a27;--forest2:#4a7c59;--bg:#f4f1de;--ink:#3d405b;--leaf:#81b29a;--card:#faf9f6;--panel:#fff;--muted:#6b7280;--hover:#bd632f;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--forest:#8fd18a;--forest2:#6fae85;--bg:#1b2419;--ink:#e6e8ef;--leaf:#3f6b55;--card:#222d20;--panel:#1f2a1d;--muted:#9aa3a0;--hover:#f0a36b}}
+:root[data-theme="dark"]{--forest:#8fd18a;--forest2:#6fae85;--bg:#1b2419;--ink:#e6e8ef;--leaf:#3f6b55;--card:#222d20;--panel:#1f2a1d;--muted:#9aa3a0;--hover:#f0a36b}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,Verdana,"Microsoft JhengHei","PingFang TC",sans-serif}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--ink);line-height:1.6;padding:16px}
+.container{max-width:1000px;margin:0 auto;background:var(--card);border-radius:16px;box-shadow:0 8px 24px rgba(45,90,39,.15);padding:24px;border:2px solid var(--forest2)}
+header{text-align:center;margin-bottom:24px;border-bottom:3px dashed var(--leaf);padding-bottom:16px}
+header h1{color:var(--forest);font-size:clamp(1.5rem,5vw,2.2rem);margin-bottom:6px}
+header p{color:var(--forest2);font-weight:bold}
+.mode-toggle{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-bottom:24px}
+.mode-btn{background:transparent;border:2px solid var(--forest);color:var(--forest);padding:8px 22px;font-size:1.05rem;font-weight:bold;border-radius:30px;cursor:pointer;transition:.3s}
+.mode-btn.active,.mode-btn:hover{background:var(--forest);color:var(--bg)}
+.nav-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;border-bottom:2px solid var(--leaf);padding-bottom:10px}
+.tab-btn{background:var(--leaf);color:#fff;border:none;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:bold;font-size:.95rem}
+.tab-btn.active,.tab-btn:hover{background:var(--forest2)}
+.sub-nav-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;background:rgba(129,178,154,.2);padding:8px;border-radius:8px}
+.sub-tab-btn{background:var(--panel);color:var(--forest2);border:1px solid var(--leaf);padding:6px 12px;border-radius:6px;cursor:pointer;font-size:.85rem;font-weight:bold}
+.sub-tab-btn.active,.sub-tab-btn:hover{background:var(--forest2);color:#fff}
+.content-panel{background:var(--panel);border-radius:12px;padding:22px;border-left:5px solid var(--forest)}
+.category-header{display:flex;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+.category-title{font-size:clamp(1.3rem,4vw,1.8rem);color:var(--forest);cursor:pointer}
+.category-title:hover{text-decoration:underline;color:var(--hover)}
+.audio-icon{cursor:pointer;font-size:1.4rem;background:none;border:none}
+.category-path{font-size:.9rem;color:var(--muted);margin-bottom:12px;font-style:italic}
+.animal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-top:20px}
+.animal-card{background:var(--card);border:1px solid rgba(74,124,89,.35);border-radius:10px;padding:14px;text-align:center;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.animal-card:hover{transform:translateY(-3px);box-shadow:0 4px 12px rgba(0,0,0,.12);border-color:var(--forest)}
+.animal-card:hover .animal-eng{text-decoration:underline;color:var(--hover)}
+.animal-eng{font-size:1.15rem;font-weight:bold;margin-bottom:4px}
+.animal-chi{font-size:.95rem;color:var(--muted)}
+.hidden{display:none!important}
+.sub{font-size:.6em;font-weight:normal}
+.desc-en{color:var(--muted);margin-top:6px}
+footer{text-align:center;margin-top:24px;padding-top:14px;border-top:3px dashed var(--leaf);color:var(--forest2);font-weight:bold}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>🌲 Wild Earth: Animal Explorer<br><span class="sub">野生大地：動物種類探索網</span></h1>
+<p>Click any English word to hear standard American pronunciation<br>點擊任何英文單字，即可聆聽標準美式發音</p>
+</header>
+
+<div class="mode-toggle">
+<button class="mode-btn active" data-mode="taxonomy">🧬 Taxonomy 界門綱目分類</button>
+<button class="mode-btn" data-mode="diet">🥩 Diets 生態飲食習慣</button>
+</div>
+
+<div id="mainTabs" class="nav-tabs"></div>
+<div id="subTabs" class="sub-nav-tabs hidden"></div>
+
+<div class="content-panel">
+<div class="category-header">
+<h2 id="panelTitle" class="category-title">Category</h2>
+<button class="audio-icon" id="speakBtn" aria-label="朗讀">🔊</button>
+</div>
+<div id="panelPath" class="category-path"></div>
+<p id="panelDesc"></p>
+<p id="panelDescEn" class="desc-en"></p>
+<div id="animalGrid" class="animal-grid"></div>
+</div>
+<footer>Designed by Shirley Du · 設計：Shirley Du</footer>
+</div>
+
+<script>
+const database = {
+  taxonomy: [
+    {
+      name: "Mammalia", common: "Mammals (哺乳綱)",
+      path: "Kingdom Animalia ➔ Phylum Chordata ➔ Class Mammalia",
+      desc: "恆溫動物，具備毛髮，多數為胎生並透過乳腺哺育後代。在此綱下我們細分了多個重要的「目 (Orders)」：", descEn: "Warm-blooded animals with hair; most give live birth and nurse their young with milk. Key orders are listed below:",
+      subOrders: [
+        { name: "Rodentia", common: "Rodents (齧齒目)",
+          desc: "特徵是上下顎各有一對會持續生長的大門牙，必須不斷磨牙。", descEn: "Defined by a pair of continuously growing incisors in each jaw, so they must gnaw constantly.",
+          animals: [
+            { eng: "Capybara", chi: "水豚" }, { eng: "Chinchilla", chi: "毛絲鼠 (龍貓)" },
+            { eng: "Beaver", chi: "河狸" }, { eng: "Squirrel", chi: "松鼠" },
+            { eng: "Hamster", chi: "倉鼠" }, { eng: "Porcupine", chi: "豪豬" }
+          ] },
+        { name: "Carnivora", common: "Carnivores (食肉目)",
+          desc: "擁有發達的犬齒與裂齒，血緣上屬於食肉演化分支（大貓熊亦屬於此目，但主食為竹子）。", descEn: "Have well-developed canines and carnassial teeth. The giant panda belongs here, though it mainly eats bamboo.",
+          animals: [
+            { eng: "Lion", chi: "獅子" }, { eng: "Polar bear", chi: "北極熊" },
+            { eng: "Grey wolf", chi: "灰狼" }, { eng: "Leopard", chi: "豹" },
+            { eng: "Sea lion", chi: "海獅" }, { eng: "Giant panda", chi: "大貓熊" }
+          ] },
+        { name: "Primates", common: "Primates (靈長目)",
+          desc: "大腦發達，雙眼向前，具有靈活的手指與抓握能力。", descEn: "Large brains, forward-facing eyes, and nimble fingers with grasping ability.",
+          animals: [
+            { eng: "Chimpanzee", chi: "黑猩猩" }, { eng: "Gorilla", chi: "大猩猩" },
+            { eng: "Lemur", chi: "狐猴" }, { eng: "Orangutan", chi: "紅毛猩猩" },
+            { eng: "Formosan macaque", chi: "臺灣獼猴" }
+          ] },
+        { name: "Cetacea", common: "Cetaceans (鯨豚類)",
+          desc: "完全水生的哺乳動物，體表光滑近乎無毛，用肺呼吸，高智商且具回聲定位能力。", descEn: "Fully aquatic mammals with smooth, nearly hairless skin; they breathe air, are highly intelligent, and use echolocation.",
+          animals: [
+            { eng: "Blue whale", chi: "藍鯨" }, { eng: "Dolphin", chi: "海豚" },
+            { eng: "Orca", chi: "虎鯨 (殺人鯨)" }, { eng: "Sperm whale", chi: "抹香鯨" }
+          ] },
+        { name: "Artiodactyla", common: "Even-toed ungulates (偶蹄目)",
+          desc: "蹄上有偶數趾，許多為反芻動物。", descEn: "Hoofed mammals with an even number of toes; many are ruminants.",
+          animals: [
+            { eng: "Giraffe", chi: "長頸鹿" }, { eng: "Hippopotamus", chi: "河馬" },
+            { eng: "Wild boar", chi: "野豬" }, { eng: "Camel", chi: "駱駝" }
+          ] }
+      ]
+    },
+    {
+      name: "Aves", common: "Birds (鳥綱)",
+      path: "Kingdom Animalia ➔ Phylum Chordata ➔ Class Aves",
+      desc: "恆溫、卵生，全身覆蓋羽毛，前肢演化為翅膀，多數具備飛行能力。", descEn: "Warm-blooded egg-layers covered in feathers; forelimbs evolved into wings, and most can fly.",
+      animals: [
+        { eng: "Bald eagle", chi: "白頭海鵰" }, { eng: "Emperor penguin", chi: "帝王企鵝" },
+        { eng: "Ostrich", chi: "鴕鳥" }, { eng: "Owl", chi: "貓頭鷹" },
+        { eng: "Hummingbird", chi: "蜂鳥" }, { eng: "Formosan blue magpie", chi: "臺灣藍鵲" }
+      ]
+    },
+    {
+      name: "Reptilia", common: "Reptiles (爬行綱)",
+      path: "Kingdom Animalia ➔ Phylum Chordata ➔ Class Reptilia",
+      desc: "變溫動物，體表覆蓋鱗片或硬殼，多在陸地產卵繁殖。", descEn: "Cold-blooded animals covered in scales or shells; most lay eggs on land.",
+      animals: [
+        { eng: "Komodo dragon", chi: "科莫多巨蜥" }, { eng: "Chameleon", chi: "變色龍" },
+        { eng: "Sea turtle", chi: "海龜" }, { eng: "King cobra", chi: "眼鏡王蛇" },
+        { eng: "Saltwater crocodile", chi: "灣鱷" }
+      ]
+    },
+    {
+      name: "Amphibia", common: "Amphibians (兩棲綱)",
+      path: "Kingdom Animalia ➔ Phylum Chordata ➔ Class Amphibia",
+      desc: "幼體在水中用鰓呼吸，經變態後，成體通常用肺和皮膚呼吸。", descEn: "Larvae breathe with gills in water; after metamorphosis, adults usually breathe with lungs and skin.",
+      animals: [
+        { eng: "Tree frog", chi: "樹蛙" }, { eng: "Salamander", chi: "蠑螈" },
+        { eng: "Axolotl", chi: "美西螈 (六角恐龍)" }, { eng: "Toad", chi: "蟾蜍" }
+      ]
+    },
+    {
+      name: "Pisces", common: "Fish (魚類)",
+      path: "Kingdom Animalia ➔ Phylum Chordata ➔ 魚類（包含硬骨魚綱、軟骨魚綱等）",
+      desc: "終生生活在水中，用鰓呼吸，用鰭游泳的變溫脊椎動物總稱。「Pisces」為通俗統稱，並非單一正式的分類綱。", descEn: "Cold-blooded vertebrates that live in water all their lives, breathing with gills and swimming with fins. “Pisces” is an informal umbrella term, not one formal class.",
+      animals: [
+        { eng: "Great white shark", chi: "大白鯊" }, { eng: "Clownfish", chi: "小丑魚" },
+        { eng: "Manta ray", chi: "鬼蝠魟" }, { eng: "Seahorse", chi: "海馬" }
+      ]
+    },
+    {
+      name: "Insecta", common: "Insects (昆蟲綱)",
+      path: "Kingdom Animalia ➔ Phylum Arthropoda ➔ Class Insecta",
+      desc: "身體分為頭、胸、腹三部分，有三對足，多數有翅膀，屬於無脊椎動物。", descEn: "Bodies have three parts (head, thorax, abdomen) and three pairs of legs; most have wings. They are invertebrates.",
+      animals: [
+        { eng: "Honey bee", chi: "蜜蜂" }, { eng: "Butterfly", chi: "蝴蝶" },
+        { eng: "Ladybug", chi: "瓢蟲" }, { eng: "Dragonfly", chi: "蜻蜓" }
+      ]
+    }
+  ],
+  diet: [
+    { name: "Carnivores", common: "Carnivores (肉食性動物)",
+      path: "Ecological Diets ➔ Carnivores",
+      desc: "主要以捕食其他動物的肉為主要營養來源的掠食者群體。", descEn: "Predators that get most of their nutrition by eating other animals' meat.",
+      animals: [
+        { eng: "Lion", chi: "獅子" }, { eng: "Great white shark", chi: "大白鯊" },
+        { eng: "Bald eagle", chi: "白頭海鵰" }, { eng: "Grey wolf", chi: "灰狼" },
+        { eng: "King cobra", chi: "眼鏡王蛇" }
+      ] },
+    { name: "Herbivores", common: "Herbivores (草食性動物)",
+      path: "Ecological Diets ➔ Herbivores",
+      desc: "以植物、樹葉、竹子或海草等植物性物質為主食的動物（包含食肉目的大貓熊）。", descEn: "Animals that mainly eat plants, leaves, bamboo, or seagrass (including the giant panda from order Carnivora).",
+      animals: [
+        { eng: "Giant panda", chi: "大貓熊" }, { eng: "Asian elephant", chi: "亞洲象" },
+        { eng: "Koala", chi: "無尾熊" }, { eng: "Giraffe", chi: "長頸鹿" },
+        { eng: "Green sea turtle", chi: "綠蠵龜 (成年以海草、藻類為主)" }
+      ] },
+    { name: "Omnivores", common: "Omnivores (雜食性動物)",
+      path: "Ecological Diets ➔ Omnivores",
+      desc: "飲食範圍廣泛，能同時消化並吸收植物和動物性食物來源的營養。", descEn: "Animals with a broad diet that can digest and gain nutrition from both plants and animals.",
+      animals: [
+        { eng: "Grizzly bear", chi: "灰熊" }, { eng: "Chimpanzee", chi: "黑猩猩" },
+        { eng: "Wild boar", chi: "野豬" }, { eng: "Raccoon", chi: "浣熊" },
+        { eng: "Crow", chi: "烏鴉" }
+      ] }
+  ]
+};
+
+let currentMode = 'taxonomy';
+let currentCategoryData = null;
+let currentParent = null;
+
+function speak(text) {
+  if (!('speechSynthesis' in window)) {
+    alert("您的瀏覽器不支援語音功能，建議使用 Chrome 瀏覽器。");
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US';
+  u.rate = 0.85;
+  window.speechSynthesis.speak(u);
+}
+
+function shortName(c) { return c.common.split('(')[0].trim(); }
+
+function speakCurrentCategory() {
+  if (!currentCategoryData) return;
+  speak(`${currentCategoryData.name}, also known as ${shortName(currentCategoryData)}`);
+}
+
+function switchMode(mode, btn) {
+  currentMode = mode;
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderMainTabs();
+}
+
+function renderMainTabs() {
+  const box = document.getElementById('mainTabs');
+  box.innerHTML = '';
+  const cats = database[currentMode];
+  cats.forEach((cat, i) => {
+    const b = document.createElement('button');
+    b.className = 'tab-btn' + (i === 0 ? ' active' : '');
+    b.textContent = cat.common;
+    b.onclick = () => {
+      box.querySelectorAll('.tab-btn').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      loadCategory(cat);
+    };
+    box.appendChild(b);
+  });
+  loadCategory(cats[0]);
+}
+
+function loadCategory(cat) {
+  const sub = document.getElementById('subTabs');
+  if (cat.subOrders) {
+    sub.classList.remove('hidden');
+    renderSubTabs(cat);
+    loadSubCategory(cat.subOrders[0], cat.path);
+  } else {
+    sub.classList.add('hidden');
+    showPanel(cat, cat.path, cat.name);
+  }
+}
+
+function renderSubTabs(cat) {
+  const box = document.getElementById('subTabs');
+  box.innerHTML = '';
+  cat.subOrders.forEach((s, i) => {
+    const b = document.createElement('button');
+    b.className = 'sub-tab-btn' + (i === 0 ? ' active' : '');
+    b.textContent = s.common;
+    b.onclick = () => {
+      box.querySelectorAll('.sub-tab-btn').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      loadSubCategory(s, cat.path);
+    };
+    box.appendChild(b);
+  });
+}
+
+function loadSubCategory(s, parentPath) {
+  showPanel(s, `${parentPath} ➔ Order ${s.name}`, s.name);
+}
+
+function showPanel(data, path, name) {
+  currentCategoryData = data;
+  document.getElementById('panelTitle').textContent = `${name} [${shortName(data)}]`;
+  document.getElementById('panelPath').textContent = path;
+  document.getElementById('panelDesc').textContent = data.desc;
+  document.getElementById('panelDescEn').textContent = data.descEn || '';
+  renderAnimals(data.animals);
+}
+
+function renderAnimals(animals) {
+  const grid = document.getElementById('animalGrid');
+  grid.innerHTML = '';
+  if (!animals || !animals.length) return;
+  animals.forEach(a => {
+    const card = document.createElement('div');
+    card.className = 'animal-card';
+    card.onclick = () => speak(a.eng);
+    const e = document.createElement('div');
+    e.className = 'animal-eng';
+    e.textContent = a.eng;
+    const c = document.createElement('div');
+    c.className = 'animal-chi';
+    c.textContent = a.chi;
+    card.append(e, c);
+    grid.appendChild(card);
+  });
+}
+
+document.querySelectorAll('.mode-btn').forEach(b => b.onclick = () => switchMode(b.dataset.mode, b));
+document.getElementById('panelTitle').onclick = speakCurrentCategory;
+document.getElementById('speakBtn').onclick = speakCurrentCategory;
+renderMainTabs();
+</script>
+</body>
+</html>
