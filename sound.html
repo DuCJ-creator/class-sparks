@@ -6,9 +6,9 @@
 <title>動物叫聲英文互動學習</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap">
 <style>
-:root{--bg:linear-gradient(135deg,#dfe7ff 0%,#f1e3ff 50%,#d7f5ee 100%);--ink:#1b2140;--mut:#566082;--b:#0e7f73;--glass:rgba(255,255,255,.5);--edge:rgba(255,255,255,.8);--hi:rgba(255,255,255,.9);--shadow:0 10px 32px rgba(70,80,140,.18);--sel:#1b2140;--selink:#fff;--o1:rgba(140,120,255,.5);--o2:rgba(70,210,190,.45);--o3:rgba(255,140,190,.4);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:linear-gradient(135deg,#0b0f2e,#1a1445 50%,#0a2a3b);--ink:#eef0ff;--mut:#a9b0d8;--b:#5eead4;--glass:rgba(255,255,255,.08);--edge:rgba(255,255,255,.18);--hi:rgba(255,255,255,.25);--shadow:0 10px 36px rgba(0,0,0,.45);--sel:rgba(255,255,255,.92);--selink:#14183a;--o1:rgba(120,90,255,.5);--o2:rgba(30,190,170,.35);--o3:rgba(255,90,160,.3)}}
-:root[data-theme="dark"]{--bg:linear-gradient(135deg,#0b0f2e,#1a1445 50%,#0a2a3b);--ink:#eef0ff;--mut:#a9b0d8;--b:#5eead4;--glass:rgba(255,255,255,.08);--edge:rgba(255,255,255,.18);--hi:rgba(255,255,255,.25);--shadow:0 10px 36px rgba(0,0,0,.45);--sel:rgba(255,255,255,.92);--selink:#14183a;--o1:rgba(120,90,255,.5);--o2:rgba(30,190,170,.35);--o3:rgba(255,90,160,.3)}
+:root{--bg:linear-gradient(135deg,#d9f2e3 0%,#cfeee9 45%,#cfe6f7 100%);--ink:#0f2f2a;--mut:#4a6b66;--b:#0b6e5c;--glass:rgba(255,255,255,.45);--edge:rgba(255,255,255,.75);--hi:rgba(255,255,255,.9);--shadow:0 10px 32px rgba(20,90,80,.18);--sel:#0f3d33;--selink:#fff;--o1:rgba(60,170,110,.45);--o2:rgba(40,150,220,.4);--o3:rgba(120,220,200,.45);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:linear-gradient(135deg,#04170f,#0a2e25 45%,#052a3f);--ink:#e8fbf3;--mut:#9cc5b8;--b:#6ee7b7;--glass:rgba(255,255,255,.07);--edge:rgba(255,255,255,.16);--hi:rgba(255,255,255,.22);--shadow:0 10px 36px rgba(0,0,0,.45);--sel:rgba(232,251,243,.92);--selink:#06241c;--o1:rgba(30,160,90,.4);--o2:rgba(20,120,200,.4);--o3:rgba(20,190,170,.3)}}
+:root[data-theme="dark"]{--bg:linear-gradient(135deg,#04170f,#0a2e25 45%,#052a3f);--ink:#e8fbf3;--mut:#9cc5b8;--b:#6ee7b7;--glass:rgba(255,255,255,.07);--edge:rgba(255,255,255,.16);--hi:rgba(255,255,255,.22);--shadow:0 10px 36px rgba(0,0,0,.45);--sel:rgba(232,251,243,.92);--selink:#06241c;--o1:rgba(30,160,90,.4);--o2:rgba(20,120,200,.4);--o3:rgba(20,190,170,.3)}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Manrope","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.5}
@@ -60,19 +60,20 @@ h1{font-weight:800;letter-spacing:-.02em}
 .hero button:nth-child(n):active{transform:scale(.93);box-shadow:var(--shadow)}
 .tabs button[aria-selected="true"]{background:var(--sel);color:var(--selink);border-color:transparent}
 .chip,.sp,.next{border:1px solid var(--edge);color:var(--ink);box-shadow:inset 0 1px 0 var(--hi);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-.chip{background:rgba(255,196,60,.32)}
-.chip.o{background:rgba(255,90,140,.3);color:var(--ink)}
-.chip.x{background:rgba(30,200,170,.3);color:var(--ink)}
+.chip{background:rgba(60,170,100,.32)}
+.chip.o{background:rgba(40,130,220,.32);color:var(--ink)}
+.chip.x{background:rgba(225,180,95,.4);color:var(--ink)}
 .sp,.next{background:rgba(255,255,255,.28)}
 .opts button.ok{background:rgba(40,200,150,.5)}
-.opts button.no{background:rgba(255,90,130,.5)}
+.opts button.no{background:rgba(235,110,90,.5)}
 input[type=search]::placeholder{color:var(--mut)}
+.hero button:nth-child(n){width:auto;min-width:52px;height:52px;padding:0 10px;font-size:1.6rem;border-radius:999px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<h1>🐾 動物叫聲英文教室 Prepared by Shirley</h1>
+<h1>🐾 "What does the Fox Say?" 動物叫聲英文教室 by Shirley Du</h1>
 <p class="sub">點一點彩色按鈕就能聽發音，邊玩邊學動物怎麼叫、慣用語怎麼說！</p>
 <div class="hero" id="hero" aria-label="快速聽叫聲"></div>
 <div class="note" id="note">你的瀏覽器不支援語音播放，請改用 Chrome、Safari 或 Edge。</div>
@@ -86,7 +87,7 @@ input[type=search]::placeholder{color:var(--mut)}
 <section id="q" hidden></section>
 </div>
 <script>
-var D="🐶|Dog|狗|bark|woof,arf,ruff,bow-wow|growl 低吼,howl 嚎叫,yelp 哀鳴;🐱|Cat|貓|meow|meow,miaow|purr 滿足呼嚕聲,hiss 嘶嘶怒叫;🐮|Cow|牛|moo|moo|low 沉悶哞叫;🐷|Pig|豬|oink|oink|squeal 高音尖叫,snort 鼻息哼聲;🐑|Sheep / Lamb|羊|baa,bleat|baa|;🐴|Horse|馬|neigh,whinny|neigh|snort 噴氣,snicker 輕嘶;🐦|Bird|鳥|chirp,tweet,sing|chirp,tweet|twitter 嘰嘰喳喳叫;🦆|Duck|鴨|quack|quack|;🐓|Rooster|公雞|crow|cock-a-doodle-doo|;🐔|Hen|母雞|cluck|cluck,cackle|cackle 下蛋後的咯咯聲;🦃|Turkey|火雞|gobble|gobble|;🐸|Frog|青蛙|croak|ribbit,croak|;🐍|Snake|蛇|hiss|hiss|;🐝|Bee|蜜蜂|buzz|buzz|hum 吟嗡聲;🐭|Mouse|老鼠|squeak|squeak|;🦉|Owl|貓頭鷹|hoot|hoot,twit-twoo|screech 尖叫;🦁|Lion / Tiger|獅／虎|roar|roar|growl 低吼,snarl 咆哮;🐺|Wolf / Coyote|狼／郊狼|howl|howl|yip 短促吠叫,yelp 短促吠叫;🐻|Bear|熊|growl|growl|roar 大吼;🐘|Elephant|大象|trumpet|trumpet|;🐵|Monkey / Ape|猴／猩猩|chatter,screech|chatter|scream 尖叫,whoop 呼喊;🦌|Deer|鹿|bleat,bellow||grunt 低哼;🦢|Goose|鵝|honk|honk|hiss 生氣嘶叫;🐴|Donkey|驢|bray|hee-haw|;🐐|Goat|山羊|bleat|bleat,meh|;🐦|Crow|烏鴉|caw|caw|;🕊️|Pigeon / Dove|鴿|coo|coo|;🦅|Eagle / Hawk|鷹|screech,scream|screech|;🐬|Dolphin|海豚|click,whistle|click|;🐋|Whale|鯨魚|sing||click 喀噠聲;🦗|Cricket|蟋蟀|chirp|chirp|creak;🦇|Bat|蝙蝠|squeak,screech|squeak|;🦊|Fox|狐狸|bark,scream||gecker 激動喀喀聲".split(";").map(function(r){var p=r.split("|");return{e:p[0],n:p[1],z:p[2],v:p[3]?p[3].split(","):[],o:p[4]?p[4].split(","):[],x:p[5]?p[5].split(","):[]}});
+var D="🐶|Dog|狗|bark|woof,arf,ruff,bow-wow|growl 低吼,howl 嚎叫,yelp 哀鳴;🐱|Cat|貓|meow|meow,miaow|purr 滿足呼嚕聲,hiss 嘶嘶怒叫;🐮|Cow|牛|moo|moo|low 沉悶哞叫;🐷|Pig|豬|oink|oink|squeal 高音尖叫,snort 鼻息哼聲;🐑|Sheep / Lamb|羊|baa,bleat|baa|;🐴|Horse|馬|neigh,whinny|neigh|snort 噴氣,snicker 輕嘶;🐦|Bird|鳥|chirp,tweet,sing|chirp,tweet|twitter 嘰嘰喳喳叫;🦆|Duck|鴨|quack|quack|;🐓|Rooster|公雞|crow|cock-a-doodle-doo|;🐔|Hen|母雞|cluck|cluck,cackle|cackle 下蛋後的咯咯聲;🦃|Turkey|火雞|gobble|gobble|;🐸|Frog|青蛙|croak|ribbit,croak|;🐍|Snake|蛇|hiss|hiss|;🐝|Bee|蜜蜂|buzz|buzz|hum 吟嗡聲;🐁|Mouse|老鼠|squeak|squeak|;🦉|Owl|貓頭鷹|hoot|hoot,twit-twoo|screech 尖叫;🦁🐯|Lion / Tiger|獅／虎|roar|roar|growl 低吼,snarl 咆哮;🐺|Wolf / Coyote|狼／郊狼|howl|howl|yip 短促吠叫,yelp 短促吠叫;🐻|Bear|熊|growl|growl|roar 大吼;🐘|Elephant|大象|trumpet|trumpet|;🐒|Monkey / Ape|猴／猩猩|chatter,screech|chatter|scream 尖叫,whoop 呼喊;🦌|Deer|鹿|bleat,bellow||grunt 低哼;🪿|Goose|鵝|honk|honk|hiss 生氣嘶叫;🫏|Donkey|驢|bray|hee-haw|;🐐|Goat|山羊|bleat|bleat,meh|;🐦‍⬛|Crow|烏鴉|caw|caw|;🕊️|Pigeon / Dove|鴿|coo|coo|;🦅|Eagle / Hawk|鷹|screech,scream|screech|;🐬|Dolphin|海豚|click,whistle|click|;🐋|Whale|鯨魚|sing||click 喀噠聲;🦗|Cricket|蟋蟀|chirp|chirp|creak;🦇|Bat|蝙蝠|squeak,screech|squeak|;🦊|Fox|狐狸|bark,scream||gecker 激動喀喀聲".split(";").map(function(r){var p=r.split("|");return{e:p[0],n:p[1],z:p[2],v:p[3]?p[3].split(","):[],o:p[4]?p[4].split(","):[],x:p[5]?p[5].split(","):[]}});
 var I=[
 ["🐕 狗叫 Bark / Growl",[
 ["Bark up the wrong tree","獵犬對著錯誤的樹狂吠","找錯對象、搞錯方向、抓錯重點。",[["If you think I stole your pen, you’re barking up the wrong tree.","如果你以為是我偷了你的筆，那你就找錯人了。"]]],
@@ -139,7 +140,7 @@ document.querySelectorAll(".opts button").forEach(function(x){if(x.dataset.a===q
 document.getElementById("fb").textContent=ok?"答對了！🎉 "+qs.cur.n:"答案是 "+qs.cur.e+" "+qs.cur.n+"（"+qs.cur.z+"）";document.getElementById("nx").hidden=false;return}
 if(b.id==="nx")renderQ()});
 document.getElementById("s").addEventListener("input",function(e){renderA(e.target.value)});
-document.getElementById("hero").innerHTML=["🐶|woof","🐱|meow","🐮|moo","🐷|oink","🐑|baa","🦆|quack","🐓|cock-a-doodle-doo","🐸|ribbit","🐝|buzz","🦁|roar","🐺|howl","🐘|trumpet"].map(function(s){var p=s.split("|");return '<button data-s="'+p[1]+'" aria-label="'+p[1]+'">'+p[0]+'</button>'}).join("");
+document.getElementById("hero").innerHTML=D.map(function(a){var w=a.o[0]||a.v[0]||a.x[0].split(" ")[0];return '<button data-s="'+esc(w)+'" aria-label="'+esc(a.n+" "+w)+'" title="'+esc(a.n+" · "+w)+'">'+a.e+'</button>'}).join("");
 renderA();renderI();
 </script>
 </body>
