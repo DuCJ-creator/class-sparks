@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>皮與殼：英文單字大冒險</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#fff8ec;--card:#fff;--ink:#2b2433;--sub:#6b6275;--pri:#ff7a45;--pri2:#ffe3d3;--ok:#2fb36d;--bad:#e5484d;--line:#f0dfc8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#1d1a24;--card:#2a2634;--ink:#f5f0fa;--sub:#a9a0b8;--pri:#ff8f5e;--pri2:#4a3328;--line:#3d3749}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#1d1a24;--card:#2a2634;--ink:#f5f0fa;--sub:#a9a0b8;--pri:#ff8f5e;--pri2:#4a3328;--line:#3d3749}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;line-height:1.5}
+main{max-width:900px;margin:0 auto;padding:16px}
+h1{text-align:center;font-size:1.7rem;margin:8px 0 2px}
+.tag{text-align:center;color:var(--sub);margin:0 0 14px}
+nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+button{font:inherit;cursor:pointer;border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:8px 16px;transition:transform .15s}
+button:hover{transform:translateY(-2px)}
+button.on{background:var(--pri);border-color:var(--pri);color:#fff;font-weight:700}
+.chips{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.chips button{padding:5px 12px;font-size:.9rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.c{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:14px 10px;text-align:center;cursor:pointer;min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;transition:transform .2s,border-color .2s}
+.c:hover{transform:rotate(-1.5deg) scale(1.03);border-color:var(--pri)}
+.c .e{font-size:2.2rem}.c .w{font-size:1.35rem;font-weight:800}
+.c .z{color:var(--pri);font-weight:700}.c .n{font-size:.8rem;color:var(--sub)}
+.c .back{display:none}.c.flip .back{display:block}.c.flip .hint{display:none}
+.hint{font-size:.8rem;color:var(--sub)}
+.spk{border:none;background:var(--pri2);padding:4px 10px;font-size:.9rem;margin-top:4px}
+.box{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:16px;margin-bottom:14px}
+.cmp{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.t{background:var(--pri2);border-radius:14px;padding:10px;text-align:center;cursor:pointer}
+.t b{display:block;font-size:1.1rem}.t span{color:var(--pri);font-weight:800}
+.bar{height:14px;border-radius:9px;background:linear-gradient(90deg,#9be39b,#ffd36b,#ff7a45,#a0522d);margin:8px 0}
+.q{font-size:1.25rem;text-align:center;margin:6px 0 14px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opts button{border-radius:14px;font-size:1.1rem;font-weight:700}
+.opts button.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.opts button.bad{background:var(--bad);color:#fff;border-color:var(--bad)}
+.fb{text-align:center;min-height:3em;margin:12px 0}
+.prog{height:8px;background:var(--line);border-radius:6px;overflow:hidden;margin-bottom:12px}
+.prog i{display:block;height:100%;background:var(--pri);width:0;transition:width .3s}
+.big{text-align:center;font-size:3rem}
+.hid{display:none}
+:root{--bg:#f3efe9;--card:rgba(255,255,255,.5);--ink:#1f1d22;--sub:#7b767f;--pri:#a8624a;--pri2:rgba(168,98,74,.1);--line:rgba(255,255,255,.75);--ok:#4c9a73;--bad:#c4545a;--sh:0 10px 34px rgba(70,50,40,.08);--bd:rgba(120,100,90,.14)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#16151a;--card:rgba(255,255,255,.06);--ink:#f1eef4;--sub:#9b95a3;--pri:#e0a085;--pri2:rgba(224,160,133,.12);--line:rgba(255,255,255,.12);--sh:0 10px 34px rgba(0,0,0,.35);--bd:rgba(255,255,255,.08)}}
+:root[data-theme="dark"]{--bg:#16151a;--card:rgba(255,255,255,.06);--ink:#f1eef4;--sub:#9b95a3;--pri:#e0a085;--pri2:rgba(224,160,133,.12);--line:rgba(255,255,255,.12);--sh:0 10px 34px rgba(0,0,0,.35);--bd:rgba(255,255,255,.08)}
+body{background:radial-gradient(800px 500px at 8% -8%,rgba(220,170,140,.38),transparent 70%),radial-gradient(700px 500px at 100% 8%,rgba(140,165,200,.30),transparent 70%),radial-gradient(700px 600px at 50% 110%,rgba(170,190,160,.25),transparent 70%),var(--bg);background-attachment:fixed;min-height:100vh;font-weight:300}
+h1{font-family:"Noto Serif TC","Songti TC",serif;font-weight:300;letter-spacing:.35em;font-size:2rem;margin:20px 0 4px;text-indent:.35em}
+.tag{letter-spacing:.12em;font-size:.9rem;margin-bottom:22px}
+nav{gap:4px;padding:4px;border-radius:999px;background:var(--card);border:1px solid var(--line);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);width:fit-content;margin:0 auto 22px;box-shadow:var(--sh)}
+button{border:1px solid transparent;background:transparent;font-weight:400;letter-spacing:.05em;color:var(--ink)}
+button:hover{transform:none;background:var(--pri2)}
+button.on{background:var(--ink);color:var(--bg);border-color:transparent;font-weight:400}
+.chips button{border:1px solid var(--bd);background:var(--card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.chips button.on{background:var(--ink);color:var(--bg)}
+.c,.box,.t{background:var(--card);border:1px solid var(--line);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);box-shadow:var(--sh),inset 0 1px 0 rgba(255,255,255,.35);border-radius:20px}
+.c:hover{transform:translateY(-3px);border-color:var(--pri)}
+.c .w{font-weight:500;letter-spacing:.04em}.c .z{font-weight:400}
+.c .e{font-size:2rem;filter:saturate(.85)}
+.spk{background:var(--pri2);color:var(--pri);font-size:.8rem;padding:3px 10px}
+.spk:hover{background:var(--pri2)}
+.t{padding:12px 10px;cursor:pointer;transition:transform .2s,border-color .2s}
+.t:hover{transform:translateY(-2px);border-color:var(--pri)}
+.t b{font-weight:400;font-size:1rem}.t span{font-weight:500;letter-spacing:.04em}
+.bar{height:4px;background:linear-gradient(90deg,#c9d8c0,#e6cf9d,#d4906a,#8a5a44)}
+.gt{display:flex;align-items:baseline;gap:10px;margin:26px 4px 10px;font-weight:400;letter-spacing:.12em;font-size:1rem}
+.gt small{color:var(--sub);letter-spacing:.04em;font-size:.8rem}
+.gt::after{content:"";flex:1;height:1px;background:var(--bd)}
+.opts button{border:1px solid var(--bd);background:var(--card);font-weight:400}
+.opts button:hover{border-color:var(--pri)}
+.opts button.ok{background:var(--ok);color:#fff}.opts button.bad{background:var(--bad);color:#fff}
+.prog{height:3px}.prog i{background:var(--pri)}
+</style>
+</head>
+<body>
+<main>
+<h1>皮 與 殼</h1>
+<p class="tag">中文都說「皮」，英文卻各有各的名字・點一點，聽一聽</p>
+<nav id="nav">
+<button class="on" data-v="cmp">🔍 中英對照</button>
+<button data-v="cards">🃏 單字卡</button>
+<button data-v="quiz">🎯 小測驗</button>
+</nav>
+
+<section id="cmp">
+<div class="box"><b>厚薄大不同！</b>水果的皮，英文看「厚度」來選字：
+<div class="bar"></div>
+<div style="display:flex;justify-content:space-between;font-size:.9rem"><span>薄・可吃 skin</span><span>稍厚 peel</span><span>厚硬 rind</span></div></div>
+<div id="cmpGrid"></div>
+<p class="hint" style="text-align:center">點方塊可聽發音</p>
+</section>
+
+<section id="cards" class="hid">
+<div class="chips" id="chips"></div>
+<div style="text-align:center;margin-bottom:12px"><button id="shuf">🔀 洗牌</button> <button id="hideZh">🙈 自我測驗模式：關</button></div>
+<div class="grid" id="grid"></div>
+</section>
+
+<section id="quiz" class="hid">
+<div class="box">
+<div class="prog"><i id="pg"></i></div>
+<div id="qbody"></div>
+</div>
+</section>
+</main>
+
+<script>
+const CATS={a:"🐾 人與動物的皮",b:"🌽 植物與作物",c:"🦐 海鮮與殼",d:"🏠 日常與環境"};
+const W=[
+["skin","皮膚",'a',"🧑","最通用詞，人或動物的皮膚"],
+["scalp","頭皮",'a',"💆","長頭髮的頭部皮膚"],
+["hide","獸皮／生皮",'a',"🐄","牛、馬等大型動物厚重的皮"],
+["pelt","毛皮",'a',"🦊","帶濃密毛的皮，如狐狸、水貂"],
+["leather","皮革",'a',"👜","加工後的成品，如皮鞋、皮包"],
+["fur","軟毛／毛皮",'a',"🐇","哺乳動物柔軟細密的毛"],
+["cuticle","表皮／指甲甘皮",'a',"💅","最外層角質；指甲邊緣的死皮"],
+["skin","薄果皮／菜皮",'b',"🍎","薄、可吃：蘋果、葡萄、番茄、馬鈴薯"],
+["peel","厚果皮",'b',"🍌","稍厚、需剝除：香蕉、橘子"],
+["rind","硬果皮",'b',"🍉","厚硬堅韌：西瓜、鳳梨、哈密瓜"],
+["zest","柑橘皮屑",'b',"🍋","檸檬、橙最外層，常擦碎烘焙"],
+["bark","樹皮",'b',"🌳","樹幹和根部最外層"],
+["husk","作物外苞／粗殼",'b',"🌽","玉米苞葉、椰子外殼"],
+["hull","穀殼",'b',"🌾","稻米、燕麥、大麥最外層硬殼"],
+["bran","米糠／麥麩",'b',"🥣","穀物精製時被碾掉的外皮"],
+["chaff","穎殼／糠皮",'b',"🌿","打穀時分離出的碎屑"],
+["pod","豆莢",'b',"🫛","包裹豆類種子：豌豆莢、四季豆莢"],
+["shell","硬殼／貝殼",'c',"🐚","最通用：蛤蜊、螃蟹、堅果、雞蛋"],
+["carapace","甲殼／背甲",'c',"🐢","蟹、蝦、龍蝦或烏龜背部硬甲"],
+["exoskeleton","外骨骼／蝦殼",'c',"🪲","昆蟲、蝦蟹支撐身體的外殼；剝下的蝦殼也可說 shrimp shell"],["dried shrimp","蝦皮（小蝦乾）",'c',"🦐","料理常用的蝦皮其實是整隻小蝦曬乾，不是蝦的外皮"],
+["shuck","剝下的空殼",'c',"🦪","取出肉後的牡蠣、蛤蜊空殼"],
+["sod","草皮塊",'d',"🟫","連根帶土挖起、用來鋪草坪"],
+["turf","草皮／草地",'d',"🏟️","整片茂盛草地；artificial turf 人工草皮"],
+["crust","麵包皮／地殼",'d',"🍞","變硬的外層：bread crust、earth’s crust"],
+["case","外殼／套子",'d',"📱","人造保護殼：phone case、computer case"],
+["wrapper","包裝紙／餃子皮",'d',"🥟","薄皮：dumpling wrapper、spring roll wrapper"]
+];
+// 中英對照：中文「皮」們
+const CMP=[["蘋果皮","🍎","skin"],["香蕉皮","🍌","peel"],["西瓜皮","🍉","rind"],["樹皮","🌳","bark"],["牛皮","🐄","hide"],["狐狸毛皮","🦊","pelt"],["皮鞋的皮","👞","leather"],["頭皮","💆","scalp"],["玉米皮","🌽","husk"],["稻殼","🌾","hull"],["豆莢","🫛","pod"],["麵包皮","🍞","crust"],["草皮","🌱","sod / turf"],["水餃皮","🥟","wrapper"],["蛋殼","🥚","shell"],["蝦殼","🦐","exoskeleton"],["蝦皮（小蝦乾）","🦐","dried shrimp"],["龜殼","🐢","carapace"],["手機殼","📱","case"],["檸檬皮屑","🍋","zest"]];
+
+// 發音
+let voice=null;
+function pickVoice(){const v=speechSynthesis.getVoices();voice=v.find(x=>x.lang==="en-US")||v.find(x=>x.lang.startsWith("en"))||null}
+if("speechSynthesis" in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+function say(t,slow){
+  if(!("speechSynthesis" in window))return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(t.replace(/\s*\/\s*/g,", "));
+  u.lang="en-US";if(voice)u.voice=voice;u.rate=slow?0.55:0.85;
+  speechSynthesis.speak(u);
+}
+
+// 導覽
+document.getElementById("nav").onclick=e=>{
+  const b=e.target.closest("button");if(!b)return;
+  document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("on",x===b));
+  ["cmp","cards","quiz"].forEach(id=>document.getElementById(id).classList.toggle("hid",id!==b.dataset.v));
+  if(b.dataset.v==="quiz")startQuiz();
+};
+
+// 對照
+const _old=CMP.map(([z,e,w],i)=>
+ `<div class="t" data-w="${w}"><div style="font-size:1.8rem">${e}</div><b>${z}</b><span>${w}</span></div>`).join("");
+const CG=[["b",["skin","peel","rind","zest","bark","husk","hull","pod"]],["a",["scalp","hide","pelt","leather"]],["c",["shell","carapace","exoskeleton","dried shrimp"]],["d",["crust","sod / turf","wrapper","case"]]];
+document.getElementById("cmpGrid").innerHTML=CG.map(([k,ws])=>{const it=CMP.filter(x=>ws.includes(x[2]));
+ return `<div class="gt">${CATS[k]}<small>${it.length} 組</small></div><div class="cmp">`+it.map(([z,e,w])=>`<div class="t" data-w="${w}"><div style="font-size:1.7rem">${e}</div><b>${z}</b><span>${w}</span></div>`).join("")+"</div>"}).join("");
+document.getElementById("cmpGrid").onclick=e=>{const t=e.target.closest(".t");if(t)say(t.dataset.w)};
+
+// 單字卡
+let cat="all",hideZh=false,list=W.slice();
+const chips=document.getElementById("chips");
+chips.innerHTML=`<button class="on" data-c="all">全部</button>`+Object.entries(CATS).map(([k,v])=>`<button data-c="${k}">${v}</button>`).join("");
+chips.onclick=e=>{const b=e.target.closest("button");if(!b)return;cat=b.dataset.c;
+  chips.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b));render()};
+document.getElementById("shuf").onclick=()=>{list.sort(()=>Math.random()-.5);render()};
+document.getElementById("hideZh").onclick=e=>{hideZh=!hideZh;e.target.textContent="🙈 自我測驗模式："+(hideZh?"開（點卡片翻面）":"關");render()};
+function render(){
+  const g=document.getElementById("grid");
+  g.innerHTML=list.filter(w=>cat==="all"||w[2]===cat).map((w,i)=>
+   `<div class="c ${hideZh?"":"flip"}" data-w="${w[0]}">
+     <div class="e">${w[3]}</div><div class="w">${w[0]}</div>
+     <div class="back"><div class="z">${w[1]}</div><div class="n">${w[4]}</div></div>
+     <div class="hint">點一下看中文</div>
+     <button class="spk" data-s="1">🔊</button><button class="spk" data-s="2">🐢 慢速</button></div>`).join("");
+}
+document.getElementById("grid").onclick=e=>{
+  const c=e.target.closest(".c");if(!c)return;
+  const s=e.target.closest("[data-s]");
+  if(s){say(c.dataset.w,s.dataset.s==="2");return}
+  c.classList.toggle("flip");say(c.dataset.w);
+};
+render();
+
+// 測驗
+const Q=[["蘋果皮","skin"],["香蕉皮","peel"],["西瓜皮","rind"],["樹皮","bark"],["牛的生皮","hide"],["狐狸的毛皮","pelt"],["皮鞋、皮包的皮革","leather"],["玉米的外苞","husk"],["稻米的硬殼","hull"],["豌豆莢","pod"],["吃完的生蠔空殼","shuck"],["手機殼","case"],["麵包皮","crust"],["水餃皮","wrapper"],["檸檬皮屑","zest"],["烏龜的背甲","carapace"],["昆蟲的外骨骼","exoskeleton"],["炒菜用的蝦皮（小蝦乾）","dried shrimp"],["鋪草坪用的草皮塊","sod"],["頭皮","scalp"],["米糠","bran"],["打穀分離出的糠屑","chaff"],["指甲邊的死皮","cuticle"]];
+let qs,qi,score;
+function startQuiz(){qs=Q.slice().sort(()=>Math.random()-.5).slice(0,10);qi=0;score=0;ask()}
+function ask(){
+  const body=document.getElementById("qbody");
+  document.getElementById("pg").style.width=(qi/qs.length*100)+"%";
+  if(qi>=qs.length){
+    const m=score>=9?"🏆 皮殼大師！":score>=6?"👍 很不錯，再練一次更穩！":"💪 多聽多練，你可以的！";
+    body.innerHTML=`<div class="big">${m.slice(0,2)}</div><p class="q">${score} / ${qs.length}　${m.slice(2)}</p><div style="text-align:center"><button class="on" onclick="startQuiz()">再玩一次</button></div>`;return}
+  const [zh,ans]=qs[qi];
+  const pool=[...new Set(Q.map(x=>x[1]))].filter(x=>x!==ans).sort(()=>Math.random()-.5).slice(0,3);
+  const opts=[ans,...pool].sort(()=>Math.random()-.5);
+  body.innerHTML=`<p class="hint" style="text-align:center">第 ${qi+1} / ${qs.length} 題</p>
+   <p class="q">「<b>${zh}</b>」英文怎麼說？</p>
+   <div class="opts">${opts.map(o=>`<button data-o="${o}">${o}</button>`).join("")}</div>
+   <div class="fb" id="fb"></div>`;
+  body.querySelector(".opts").onclick=e=>{
+    const b=e.target.closest("button");if(!b||b.disabled)return;
+    const right=b.dataset.o===ans;
+    body.querySelectorAll(".opts button").forEach(x=>{x.disabled=true;if(x.dataset.o===ans)x.classList.add("ok")});
+    if(!right)b.classList.add("bad"); else score++;
+    say(ans);
+    document.getElementById("fb").innerHTML=(right?"🎉 答對了！":"😅 正確答案是 <b>"+ans+"</b>")+`<br><button class="on" id="nx" style="margin-top:8px">${qi+1>=qs.length?"看成績":"下一題 →"}</button>`;
+    document.getElementById("nx").onclick=()=>{qi++;ask()};
+  };
+}
+</script>
+</body>
+</html>
