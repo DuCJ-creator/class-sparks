@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>動物叫聲英文互動學習</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap">
+<style>
+:root{--bg:linear-gradient(135deg,#dfe7ff 0%,#f1e3ff 50%,#d7f5ee 100%);--ink:#1b2140;--mut:#566082;--b:#0e7f73;--glass:rgba(255,255,255,.5);--edge:rgba(255,255,255,.8);--hi:rgba(255,255,255,.9);--shadow:0 10px 32px rgba(70,80,140,.18);--sel:#1b2140;--selink:#fff;--o1:rgba(140,120,255,.5);--o2:rgba(70,210,190,.45);--o3:rgba(255,140,190,.4);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:linear-gradient(135deg,#0b0f2e,#1a1445 50%,#0a2a3b);--ink:#eef0ff;--mut:#a9b0d8;--b:#5eead4;--glass:rgba(255,255,255,.08);--edge:rgba(255,255,255,.18);--hi:rgba(255,255,255,.25);--shadow:0 10px 36px rgba(0,0,0,.45);--sel:rgba(255,255,255,.92);--selink:#14183a;--o1:rgba(120,90,255,.5);--o2:rgba(30,190,170,.35);--o3:rgba(255,90,160,.3)}}
+:root[data-theme="dark"]{--bg:linear-gradient(135deg,#0b0f2e,#1a1445 50%,#0a2a3b);--ink:#eef0ff;--mut:#a9b0d8;--b:#5eead4;--glass:rgba(255,255,255,.08);--edge:rgba(255,255,255,.18);--hi:rgba(255,255,255,.25);--shadow:0 10px 36px rgba(0,0,0,.45);--sel:rgba(255,255,255,.92);--selink:#14183a;--o1:rgba(120,90,255,.5);--o2:rgba(30,190,170,.35);--o3:rgba(255,90,160,.3)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Manrope","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.5}
+.wrap{max-width:980px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:clamp(2rem,6vw,3.4rem);margin:8px 0 4px;line-height:1.1}
+.sub{color:var(--mut);margin:0 0 14px}
+.hero{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 18px}
+.hero button{font-size:2rem;background:var(--c);border:3px solid var(--line);border-radius:50%;width:62px;height:62px;cursor:pointer;box-shadow:3px 3px 0 var(--line);transition:transform .12s}
+.hero button:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--line)}
+.hero button:nth-child(2n){background:var(--a)}.hero button:nth-child(3n){background:var(--b)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tabs button{font:inherit;font-weight:600;padding:10px 18px;border:3px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--a);outline-offset:2px}
+input[type=search]{font:inherit;width:100%;padding:11px 16px;border:3px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.card{background:var(--card);border:3px solid var(--line);border-radius:20px;padding:14px;box-shadow:4px 4px 0 var(--line)}
+.top{display:flex;align-items:center;gap:10px}
+.em{font-size:2.6rem;line-height:1}
+.nm{font-weight:700;font-size:1.2rem}.zh{color:var(--mut);font-size:.9rem}
+.lbl{font-size:.8rem;color:var(--mut);margin:10px 0 4px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-weight:600;border:2px solid var(--line);border-radius:999px;padding:3px 11px;background:var(--c);color:#1E2A4A;cursor:pointer}
+.chip.o{background:var(--a);color:#fff}
+.chip.x{background:var(--b);color:#fff}
+.chip:active{transform:scale(.94)}
+.chip small{font-weight:400;opacity:.9}
+.idi{margin-bottom:14px}
+.idi h3{margin:0 0 4px;font-size:1.25rem}
+.grp{font-weight:700;margin:22px 0 8px;font-size:1.1rem}
+.row{display:flex;gap:8px;align-items:flex-start;margin:6px 0}
+.row .t{flex:1}
+.sp{flex:none;font:inherit;border:2px solid var(--line);background:var(--c);color:#1E2A4A;border-radius:50%;width:36px;height:36px;cursor:pointer}
+.k{font-weight:700;color:var(--b)}
+.q{text-align:center}
+.q .big{font-size:4rem;margin:6px}
+.opts{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+.opts button{font:inherit;font-size:1.6rem;padding:12px;border:3px solid var(--line);border-radius:16px;background:var(--card);cursor:pointer}
+.opts button.ok{background:var(--b)}.opts button.no{background:var(--a)}
+.score{font-weight:700;margin:6px 0}
+.next{font:inherit;font-weight:700;margin-top:14px;padding:10px 22px;border:3px solid var(--line);border-radius:999px;background:var(--c);color:#1E2A4A;cursor:pointer}
+.note{background:var(--card);border:2px dashed var(--line);border-radius:12px;padding:8px 12px;margin-bottom:12px;display:none}
+[hidden]{display:none!important}
+body{background:var(--bg) fixed;min-height:100vh}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(40vmax 40vmax at 12% 18%,var(--o1),transparent 70%),radial-gradient(45vmax 45vmax at 88% 30%,var(--o2),transparent 70%),radial-gradient(40vmax 40vmax at 50% 95%,var(--o3),transparent 70%)}
+h1{font-weight:800;letter-spacing:-.02em}
+.card,.tabs button,input[type=search],.opts button,.note,.hero button:nth-child(n){background:var(--glass);border:1px solid var(--edge);color:var(--ink);backdrop-filter:blur(20px) saturate(170%);-webkit-backdrop-filter:blur(20px) saturate(170%);box-shadow:var(--shadow),inset 0 1px 0 var(--hi)}
+.card{border-radius:24px}
+.hero button:nth-child(n):active{transform:scale(.93);box-shadow:var(--shadow)}
+.tabs button[aria-selected="true"]{background:var(--sel);color:var(--selink);border-color:transparent}
+.chip,.sp,.next{border:1px solid var(--edge);color:var(--ink);box-shadow:inset 0 1px 0 var(--hi);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.chip{background:rgba(255,196,60,.32)}
+.chip.o{background:rgba(255,90,140,.3);color:var(--ink)}
+.chip.x{background:rgba(30,200,170,.3);color:var(--ink)}
+.sp,.next{background:rgba(255,255,255,.28)}
+.opts button.ok{background:rgba(40,200,150,.5)}
+.opts button.no{background:rgba(255,90,130,.5)}
+input[type=search]::placeholder{color:var(--mut)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>🐾 動物叫聲英文教室 Prepared by Shirley</h1>
+<p class="sub">點一點彩色按鈕就能聽發音，邊玩邊學動物怎麼叫、慣用語怎麼說！</p>
+<div class="hero" id="hero" aria-label="快速聽叫聲"></div>
+<div class="note" id="note">你的瀏覽器不支援語音播放，請改用 Chrome、Safari 或 Edge。</div>
+<div class="tabs" role="tablist">
+<button role="tab" aria-selected="true" data-t="a">🐶 動物叫聲</button>
+<button role="tab" aria-selected="false" data-t="i">💬 慣用語</button>
+<button role="tab" aria-selected="false" data-t="q">🎧 聽音小測驗</button>
+</div>
+<section id="a"><input type="search" id="s" placeholder="搜尋動物（中文或英文）…" aria-label="搜尋動物"><p class="sub">黃色＝叫聲動詞　粉紅＝擬聲詞　綠色＝相關動詞，點了就會發音。</p><div class="grid" id="ag"></div></section>
+<section id="i" hidden></section>
+<section id="q" hidden></section>
+</div>
+<script>
+var D="🐶|Dog|狗|bark|woof,arf,ruff,bow-wow|growl 低吼,howl 嚎叫,yelp 哀鳴;🐱|Cat|貓|meow|meow,miaow|purr 滿足呼嚕聲,hiss 嘶嘶怒叫;🐮|Cow|牛|moo|moo|low 沉悶哞叫;🐷|Pig|豬|oink|oink|squeal 高音尖叫,snort 鼻息哼聲;🐑|Sheep / Lamb|羊|baa,bleat|baa|;🐴|Horse|馬|neigh,whinny|neigh|snort 噴氣,snicker 輕嘶;🐦|Bird|鳥|chirp,tweet,sing|chirp,tweet|twitter 嘰嘰喳喳叫;🦆|Duck|鴨|quack|quack|;🐓|Rooster|公雞|crow|cock-a-doodle-doo|;🐔|Hen|母雞|cluck|cluck,cackle|cackle 下蛋後的咯咯聲;🦃|Turkey|火雞|gobble|gobble|;🐸|Frog|青蛙|croak|ribbit,croak|;🐍|Snake|蛇|hiss|hiss|;🐝|Bee|蜜蜂|buzz|buzz|hum 吟嗡聲;🐭|Mouse|老鼠|squeak|squeak|;🦉|Owl|貓頭鷹|hoot|hoot,twit-twoo|screech 尖叫;🦁|Lion / Tiger|獅／虎|roar|roar|growl 低吼,snarl 咆哮;🐺|Wolf / Coyote|狼／郊狼|howl|howl|yip 短促吠叫,yelp 短促吠叫;🐻|Bear|熊|growl|growl|roar 大吼;🐘|Elephant|大象|trumpet|trumpet|;🐵|Monkey / Ape|猴／猩猩|chatter,screech|chatter|scream 尖叫,whoop 呼喊;🦌|Deer|鹿|bleat,bellow||grunt 低哼;🦢|Goose|鵝|honk|honk|hiss 生氣嘶叫;🐴|Donkey|驢|bray|hee-haw|;🐐|Goat|山羊|bleat|bleat,meh|;🐦|Crow|烏鴉|caw|caw|;🕊️|Pigeon / Dove|鴿|coo|coo|;🦅|Eagle / Hawk|鷹|screech,scream|screech|;🐬|Dolphin|海豚|click,whistle|click|;🐋|Whale|鯨魚|sing||click 喀噠聲;🦗|Cricket|蟋蟀|chirp|chirp|creak;🦇|Bat|蝙蝠|squeak,screech|squeak|;🦊|Fox|狐狸|bark,scream||gecker 激動喀喀聲".split(";").map(function(r){var p=r.split("|");return{e:p[0],n:p[1],z:p[2],v:p[3]?p[3].split(","):[],o:p[4]?p[4].split(","):[],x:p[5]?p[5].split(","):[]}});
+var I=[
+["🐕 狗叫 Bark / Growl",[
+["Bark up the wrong tree","獵犬對著錯誤的樹狂吠","找錯對象、搞錯方向、抓錯重點。",[["If you think I stole your pen, you’re barking up the wrong tree.","如果你以為是我偷了你的筆，那你就找錯人了。"]]],
+["His bark is worse than his bite.","他的狗叫聲比他咬人還恐怖","刀子嘴豆腐心、面惡心善；說話兇但不會真的傷人。",[["Don’t worry about the boss yelling; his bark is worse than his bite.","別擔心老闆大吼大叫，他只是刀子嘴豆腐心。"]]],
+["Growl at someone","對某人低吼","對某人沒好氣地吼叫、惡狠狠地說話。",[["He just growled at me when I asked for help.","我向他求助時，他只是沒好氣地對我吼了一句。"]]]]],
+["🐱 貓叫、呼嚕 Meow / Purr",[
+["Purr like a kitten","像小貓一樣發出呼嚕聲","形容機器（如引擎）運作平穩順暢，或人感到極度舒適滿足。",[["After the repair, my car engine is purring like a kitten.","修好之後，我的汽車引擎運轉得順暢極了。"]]],
+["The cat’s meow","貓咪的喵喵叫","極好的事物、頂呱呱的人或物（經典美國俚語）。",[["Your new leather jacket is the cat’s meow!","你的新皮衣真是帥呆了！"]]]]],
+["🦆 鳥鴨火雞叫 Honk / Quack / Gobble",[
+["Honk at someone","像大鵝一樣對人高聲鳴叫","對某人按喇叭。",[["Why did you honk at that driver?","你剛剛為什麼對那個司機按喇叭？"]]],
+["Gobble up something","像火雞一樣吃東西","狼吞虎嚥、快速消耗或吞噬（可用於吃東西、花錢或吸收知識）。",[["He gobbled up the breakfast in two minutes.","他在兩分鐘內把早餐狼吞虎嚥地吃完了。"]]],
+["Quack","鴨子嘎嘎叫","（轉作名詞）密醫、江湖郎中、冒牌專家。",[["That doctor is a total quack; don’t go back to him.","那個醫生完全是個密醫，別再去找他了。"]]]]],
+["🦁🐝 猛獸與昆蟲叫 Roar / Buzz",[
+["Roar with laughter","像獅子一樣吼出笑聲","哄堂大笑、放聲大笑。",[["The comedians made the whole audience roar with laughter.","喜劇演員讓全場觀眾哄堂大笑。"]]],
+["Give someone a buzz","給某人一個蜜蜂嗡嗡聲","給某人打電話。",[["Give me a buzz when you arrive at the station.","你到車站時給我打個電話。"]]]]],
+["🐭 老鼠叫 Squeak（門吱吱作響）",[
+["Squeak（動詞）","形容門缺乏潤滑，發出吱吱嘎嘎聲","動詞：吱吱作響。",[["The bedroom door squeaks every time I open it.","臥室的門每次我打開時都會吱吱作響。"],["Can you fix that door? It’s squeaking again.","你能修理那扇門嗎？它又在吱吱嘎嘎叫了。"]]],
+["Squeak（名詞）","那道吱吱聲或怪聲","名詞：吱吱聲。",[["I heard a loud squeak when she opened the front door.","當她打開大門時，我聽到一聲響亮的吱吱嘎嘎聲。"],["The oil will stop the squeak in the door hinge.","潤滑油可以消除門鉸鏈的吱吱聲。"]]]]]];
+var V=null;
+function pick(){var l=speechSynthesis.getVoices().filter(function(v){return /^en/i.test(v.lang)});V=l.filter(function(v){return /en-US/i.test(v.lang)})[0]||l[0]||null}
+function sp(t){if(!window.speechSynthesis){document.getElementById("note").style.display="block";return}
+speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.85;u.pitch=1.1;if(!V)pick();if(V)u.voice=V;speechSynthesis.speak(u)}
+if(window.speechSynthesis){pick();speechSynthesis.onvoiceschanged=pick}else document.getElementById("note").style.display="block";
+function esc(s){return s.replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function chip(w,c,zh){return '<button class="chip '+c+'" data-s="'+esc(w)+'">🔊 '+esc(w)+(zh?' <small>'+esc(zh)+'</small>':'')+'</button>'}
+function renderA(f){f=(f||"").toLowerCase();var h="";D.forEach(function(a){if(f&&(a.n+a.z).toLowerCase().indexOf(f)<0)return;
+h+='<div class="card"><div class="top"><span class="em">'+a.e+'</span><div><div class="nm">'+esc(a.n)+'</div><div class="zh">'+esc(a.z)+'</div></div></div>';
+if(a.v.length)h+='<div class="lbl">叫聲動詞 Verb</div><div class="chips">'+a.v.map(function(w){return chip(w,"")}).join("")+'</div>';
+if(a.o.length)h+='<div class="lbl">擬聲詞 Onomatopoeia</div><div class="chips">'+a.o.map(function(w){return chip(w,"o")}).join("")+'</div>';
+if(a.x.length)h+='<div class="lbl">相關動詞</div><div class="chips">'+a.x.map(function(w){var i=w.indexOf(" ");return chip(w.slice(0,i),"x",w.slice(i+1))}).join("")+'</div>';
+h+='</div>'});document.getElementById("ag").innerHTML=h||'<p>找不到這隻動物，換個關鍵字試試看。</p>'}
+function renderI(){var h="";I.forEach(function(g){h+='<div class="grp">'+g[0]+'</div>';g[1].forEach(function(p){
+h+='<div class="card idi"><div class="row"><div class="t"><h3>'+esc(p[0])+'</h3></div><button class="sp" data-s="'+esc(p[0].replace(/（.*）/,""))+'" aria-label="播放">🔊</button></div>';
+h+='<div class="row"><div class="t"><span class="k">字面：</span>'+p[1]+'</div></div><div class="row"><div class="t"><span class="k">含意：</span>'+p[2]+'</div></div>';
+p[3].forEach(function(e){h+='<div class="row"><button class="sp" data-s="'+esc(e[0])+'" aria-label="播放例句">🔊</button><div class="t">'+esc(e[0])+'<br><span class="zh">'+e[1]+'</span></div></div>'});h+='</div>'});});
+document.getElementById("i").innerHTML=h}
+var qs={n:0,ok:0,cur:null,done:false};
+function shuffle(a){return a.slice().sort(function(){return Math.random()-.5})}
+function renderQ(){var el=document.getElementById("q");var pool=D.filter(function(a){return a.o.length});
+var ans=pool[Math.floor(Math.random()*pool.length)];var word=ans.o[Math.floor(Math.random()*ans.o.length)];
+var opts=[ans];shuffle(pool).forEach(function(a){if(opts.length<4&&a.e!==ans.e&&a.o.indexOf(word)<0&&!opts.some(function(o){return o.e===a.e}))opts.push(a)});
+qs.cur=ans;qs.done=false;
+el.innerHTML='<div class="card q"><div class="score">答對 '+qs.ok+' / '+qs.n+' 題</div><p>聽聽看，這是誰的叫聲？</p><div class="big">🎧</div><button class="next" id="rp" data-s="'+esc(word)+'">🔊 再聽一次</button><div class="opts">'+shuffle(opts).map(function(o){return '<button data-a="'+o.e+'" aria-label="'+esc(o.n)+'">'+o.e+'</button>'}).join("")+'</div><p id="fb" class="score"></p><button class="next" id="nx" hidden>下一題</button></div>';
+el.dataset.w=word;setTimeout(function(){sp(word)},200)}
+document.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;
+if(b.dataset.s){sp(b.dataset.s);return}
+if(b.dataset.t){document.querySelectorAll(".tabs button").forEach(function(x){x.setAttribute("aria-selected",x===b)});["a","i","q"].forEach(function(id){document.getElementById(id).hidden=id!==b.dataset.t});if(b.dataset.t==="q"&&!document.getElementById("q").innerHTML)renderQ();return}
+if(b.dataset.a&&!qs.done){qs.done=true;qs.n++;var ok=b.dataset.a===qs.cur.e;if(ok)qs.ok++;b.classList.add(ok?"ok":"no");
+document.querySelectorAll(".opts button").forEach(function(x){if(x.dataset.a===qs.cur.e)x.classList.add("ok")});
+document.getElementById("fb").textContent=ok?"答對了！🎉 "+qs.cur.n:"答案是 "+qs.cur.e+" "+qs.cur.n+"（"+qs.cur.z+"）";document.getElementById("nx").hidden=false;return}
+if(b.id==="nx")renderQ()});
+document.getElementById("s").addEventListener("input",function(e){renderA(e.target.value)});
+document.getElementById("hero").innerHTML=["🐶|woof","🐱|meow","🐮|moo","🐷|oink","🐑|baa","🦆|quack","🐓|cock-a-doodle-doo","🐸|ribbit","🐝|buzz","🦁|roar","🐺|howl","🐘|trumpet"].map(function(s){var p=s.split("|");return '<button data-s="'+p[1]+'" aria-label="'+p[1]+'">'+p[0]+'</button>'}).join("");
+renderA();renderI();
+</script>
+</body>
+</html>
