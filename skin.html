@@ -78,7 +78,7 @@ button.on{background:var(--ink);color:var(--bg);border-color:transparent;font-we
 <body>
 <main>
 <h1>皮 與 殼</h1>
-<p class="tag">中文都說「皮」，英文卻各有各的名字・點一點，聽一聽</p>
+<p class="tag">中文都說「皮」，英文卻各有各的名字・點一點，聽一聽；Prepared by Shirley Du</p>
 <nav id="nav">
 <button class="on" data-v="cmp">🔍 中英對照</button>
 <button data-v="cards">🃏 單字卡</button>
@@ -120,7 +120,7 @@ const W=[
 ["skin","薄果皮／菜皮",'b',"🍎","薄、可吃：蘋果、葡萄、番茄、馬鈴薯"],
 ["peel","厚果皮",'b',"🍌","稍厚、需剝除：香蕉、橘子"],
 ["rind","硬果皮",'b',"🍉","厚硬堅韌：西瓜、鳳梨、哈密瓜"],
-["zest","柑橘皮屑",'b',"🍋","檸檬、橙最外層，常擦碎烘焙"],
+["zest","柑橘皮屑",'b',"🍋","檸檬、橙最外層，常擦碎烘焙"],["dried tangerine peel","陳皮",'b',"🍊","曬乾並陳放多年的柑橘皮，用於煲湯、茶飲和中藥；也常音譯為 chenpi"],
 ["bark","樹皮",'b',"🌳","樹幹和根部最外層"],
 ["husk","作物外苞／粗殼",'b',"🌽","玉米苞葉、椰子外殼"],
 ["hull","穀殼",'b',"🌾","稻米、燕麥、大麥最外層硬殼"],
@@ -138,7 +138,7 @@ const W=[
 ["wrapper","包裝紙／餃子皮",'d',"🥟","薄皮：dumpling wrapper、spring roll wrapper"]
 ];
 // 中英對照：中文「皮」們
-const CMP=[["蘋果皮","🍎","skin"],["香蕉皮","🍌","peel"],["西瓜皮","🍉","rind"],["樹皮","🌳","bark"],["牛皮","🐄","hide"],["狐狸毛皮","🦊","pelt"],["皮鞋的皮","👞","leather"],["頭皮","💆","scalp"],["玉米皮","🌽","husk"],["稻殼","🌾","hull"],["豆莢","🫛","pod"],["麵包皮","🍞","crust"],["草皮","🌱","sod / turf"],["水餃皮","🥟","wrapper"],["蛋殼","🥚","shell"],["蝦殼","🦐","exoskeleton"],["蝦皮（小蝦乾）","🦐","dried shrimp"],["龜殼","🐢","carapace"],["手機殼","📱","case"],["檸檬皮屑","🍋","zest"]];
+const CMP=[["蘋果皮","🍎","skin"],["香蕉皮","🍌","peel"],["西瓜皮","🍉","rind"],["樹皮","🌳","bark"],["牛皮","🐄","hide"],["狐狸毛皮","🦊","pelt"],["皮鞋的皮","👞","leather"],["頭皮","💆","scalp"],["玉米皮","🌽","husk"],["稻殼","🌾","hull"],["豆莢","🫛","pod"],["麵包皮","🍞","crust"],["草皮","🌱","sod / turf"],["水餃皮","🥟","wrapper"],["蛋殼","🥚","shell"],["蝦殼","🦐","exoskeleton"],["蝦皮（小蝦乾）","🦐","dried shrimp"],["龜殼","🐢","carapace"],["手機殼","📱","case"],["檸檬皮屑","🍋","zest"],["陳皮","🍊","dried tangerine peel"]];
 
 // 發音
 let voice=null;
@@ -163,7 +163,7 @@ document.getElementById("nav").onclick=e=>{
 // 對照
 const _old=CMP.map(([z,e,w],i)=>
  `<div class="t" data-w="${w}"><div style="font-size:1.8rem">${e}</div><b>${z}</b><span>${w}</span></div>`).join("");
-const CG=[["b",["skin","peel","rind","zest","bark","husk","hull","pod"]],["a",["scalp","hide","pelt","leather"]],["c",["shell","carapace","exoskeleton","dried shrimp"]],["d",["crust","sod / turf","wrapper","case"]]];
+const CG=[["b",["skin","peel","rind","zest","dried tangerine peel","bark","husk","hull","pod"]],["a",["scalp","hide","pelt","leather"]],["c",["shell","carapace","exoskeleton","dried shrimp"]],["d",["crust","sod / turf","wrapper","case"]]];
 document.getElementById("cmpGrid").innerHTML=CG.map(([k,ws])=>{const it=CMP.filter(x=>ws.includes(x[2]));
  return `<div class="gt">${CATS[k]}<small>${it.length} 組</small></div><div class="cmp">`+it.map(([z,e,w])=>`<div class="t" data-w="${w}"><div style="font-size:1.7rem">${e}</div><b>${z}</b><span>${w}</span></div>`).join("")+"</div>"}).join("");
 document.getElementById("cmpGrid").onclick=e=>{const t=e.target.closest(".t");if(t)say(t.dataset.w)};
@@ -194,7 +194,7 @@ document.getElementById("grid").onclick=e=>{
 render();
 
 // 測驗
-const Q=[["蘋果皮","skin"],["香蕉皮","peel"],["西瓜皮","rind"],["樹皮","bark"],["牛的生皮","hide"],["狐狸的毛皮","pelt"],["皮鞋、皮包的皮革","leather"],["玉米的外苞","husk"],["稻米的硬殼","hull"],["豌豆莢","pod"],["吃完的生蠔空殼","shuck"],["手機殼","case"],["麵包皮","crust"],["水餃皮","wrapper"],["檸檬皮屑","zest"],["烏龜的背甲","carapace"],["昆蟲的外骨骼","exoskeleton"],["炒菜用的蝦皮（小蝦乾）","dried shrimp"],["鋪草坪用的草皮塊","sod"],["頭皮","scalp"],["米糠","bran"],["打穀分離出的糠屑","chaff"],["指甲邊的死皮","cuticle"]];
+const Q=[["蘋果皮","skin"],["香蕉皮","peel"],["西瓜皮","rind"],["樹皮","bark"],["牛的生皮","hide"],["狐狸的毛皮","pelt"],["皮鞋、皮包的皮革","leather"],["玉米的外苞","husk"],["稻米的硬殼","hull"],["豌豆莢","pod"],["吃完的生蠔空殼","shuck"],["手機殼","case"],["麵包皮","crust"],["水餃皮","wrapper"],["檸檬皮屑","zest"],["煲湯用的陳皮","dried tangerine peel"],["烏龜的背甲","carapace"],["昆蟲的外骨骼","exoskeleton"],["炒菜用的蝦皮（小蝦乾）","dried shrimp"],["鋪草坪用的草皮塊","sod"],["頭皮","scalp"],["米糠","bran"],["打穀分離出的糠屑","chaff"],["指甲邊的死皮","cuticle"]];
 let qs,qi,score;
 function startQuiz(){qs=Q.slice().sort(()=>Math.random()-.5).slice(0,10);qi=0;score=0;ask()}
 function ask(){
